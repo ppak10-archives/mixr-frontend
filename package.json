@@ -1,0 +1,15 @@
+{
+  "name": "mixr-frontend",
+  "version": "1.0.0",
+  "description": "Front-end for mixr web app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@feedmeyourdata.com:2222/diffusion/6/mixr-frontend.git"
+  },
+  "author": "Peter",
+  "license": "ISC"
+}
