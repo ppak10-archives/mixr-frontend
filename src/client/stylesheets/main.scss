@@ -1,0 +1,14 @@
+/**
+ * main.scss
+ * Imports main scss files
+ */
+
+// Base
+@import "colors";
+@import "custom"; // Imports custom bootstrap stylings
+@import "~bootstrap/scss/bootstrap"; // Imports bootstrap scss style
+
+// Test
+.test {
+  color: $red;
+}
