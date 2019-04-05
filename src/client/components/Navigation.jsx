@@ -21,10 +21,15 @@ export const Navigation = () => (
       <span className="navbar-toggler-icon" />
     </button>
     <Link className="navbar-brand" to="/">
-      Project Name
+      mixr
     </Link>
     <div className="collapse navbar-collapse" id="navbarToggler">
       <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li className="nav-item">
+          <Link className="nav-link" to="/events">
+            Events
+          </Link>
+        </li>
         <li className="nav-item">
           <Link className="nav-link" to="/about">
             About

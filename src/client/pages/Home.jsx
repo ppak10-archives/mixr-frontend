@@ -7,7 +7,7 @@
 import React from 'react';
 
 export const HomePage = () => (
-  <div>
-    <p className="test">Hello World</p>
-  </div>
+  <>
+    <p className="test">mixr home/landing page</p>
+  </>
 );

@@ -7,7 +7,7 @@
 import React from 'react';
 
 export const AboutPage = () => (
-  <div>
+  <>
     <p>About</p>
-  </div>
+  </>
 );
