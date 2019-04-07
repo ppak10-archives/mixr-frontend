@@ -8,6 +8,8 @@ import React from 'react';
 
 export const EventsPage = () => (
   <>
-    <p>Events</p>
+    <button type="button" className="btn btn-primary btn-lg btn-block">
+      Create Event
+    </button>
   </>
 );

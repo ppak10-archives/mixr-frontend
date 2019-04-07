@@ -16,6 +16,7 @@ module.exports = {
   plugins: ['react-hooks'],
   globals: {
     document: true,
+    google: true,
   },
   env: {
     es6: true,
