@@ -10,14 +10,14 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
       "prettier --write --print-width 80",
+      "eslint --fix",
       "eslint",
       "git add ."
     ],
     "*.jsx": [
-      "eslint --fix",
       "prettier --write --print-width 80",
+      "eslint --fix",
       "eslint",
       "git add ."
     ],

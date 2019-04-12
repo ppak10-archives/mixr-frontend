@@ -5,9 +5,13 @@
 
 // Node Modules
 import React, {Component} from 'react';
+import {Provider} from 'react-redux';
 
 // Components
 import {App} from './components/App';
+
+// Redux Store
+import {configureStore} from './store';
 
 export default class Root extends Component {
   constructor() {
@@ -19,6 +23,10 @@ export default class Root extends Component {
   // }
 
   render() {
-    return <App />;
+    return (
+      <Provider store={configureStore()}>
+        <App />
+      </Provider>
+    );
   }
 }
