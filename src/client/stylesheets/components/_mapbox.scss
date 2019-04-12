@@ -3,23 +3,35 @@
  * Mapbox component styles
  */
 
-.mapbox {
-  position: relative;
+.page-top {
+  background: #f00;
   flex: 1;
-  display: flex;
-
-  .map-container {
-    flex: 1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-  }
-}
-
-.map {
-  position: absolute;
   height: 100%;
-  width: 100%;
 }
+
+.page-bottom {
+  background: #00f;
+  flex: 1;
+  height: 100%;
+}
+
+// .mapbox {
+//   position: relative;
+//   flex: 1;
+//   display: flex;
+
+//   .map-container {
+//     flex: 1;
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     left: 0;
+//     bottom: 0;
+//   }
+// }
+
+// .map {
+//   position: absolute;
+//   height: 100%;
+//   width: 100%;
+// }

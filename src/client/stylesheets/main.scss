@@ -3,7 +3,6 @@
  * Imports main scss files
  */
 
-// Base
 @import "~bootstrap/scss/bootstrap"; // Imports bootstrap scss style
 @import "colors";
 @import "custom"; // Imports custom bootstrap stylings
@@ -11,8 +10,3 @@
 
 // Components
 @import "components/mapbox";
-
-// Test
-.test {
-  color: $red;
-}
