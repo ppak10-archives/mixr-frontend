@@ -8,27 +8,16 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 // Components
-import {Navigation} from './Navigation';
+import {Navigation} from './Navigation.container';
 
 // Pages
 import {AboutPage} from '../pages/About';
 import {EventsPage} from '../pages/Events';
 import {HomePage} from '../pages/Home';
 
-// PropTypes
-import {ACTION_PROPTYPE} from '../constants/proptypes';
-
 export class App extends Component {
   constructor() {
     super();
-  }
-
-  componentDidMount() {
-    this.props.getFBLoginStatus();
-  }
-
-  componentDidUpdate() {
-    this.props.getFBLoginStatus();
   }
 
   render() {
@@ -46,7 +35,3 @@ export class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  getFBLoginStatus: ACTION_PROPTYPE,
-};

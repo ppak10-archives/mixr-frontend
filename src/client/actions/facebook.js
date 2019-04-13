@@ -16,7 +16,7 @@ export const getFBLoginStatus = () => async (dispatch) => {
           type: 'FB_LOGIN_STATUS_FAILURE',
         });
       }
-    });
+    }, true); // Forces roundtrip to facebook servers, not just cache
   } catch (err) {
     // console.log(err);
   }

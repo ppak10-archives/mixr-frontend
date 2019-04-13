@@ -1,13 +1,13 @@
 /**
- * App.container.jsx
- * Container for app component
+ * Navigation.container.jsx
+ * Container for navigation component
  */
 
 // Node Modules
 import {connect} from 'react-redux';
 
 // Components
-import {App as AppComponent} from './App.component';
+import {Navigation as NavigationComponent} from './Navigation.component';
 
 // Actions
 import {getFBLoginStatus} from '../actions/facebook';
@@ -20,7 +20,7 @@ const mapStateToProps = (state) => ({
   fbLoginStatus: state.authentication.fbLoginStatus,
 });
 
-export const App = connect(
+export const Navigation = connect(
     mapStateToProps,
     mapDispatchToProps,
-)(AppComponent);
+)(NavigationComponent);
