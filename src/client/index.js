@@ -11,7 +11,7 @@ import {render} from 'react-dom';
 import './style';
 
 // App
-import Root from './Root';
+import {Root} from './Root';
 
 // Document Element
 render(<Root />, document.getElementById('root'));

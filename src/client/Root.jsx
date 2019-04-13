@@ -4,29 +4,17 @@
  */
 
 // Node Modules
-import React, {Component} from 'react';
+import React from 'react';
 import {Provider} from 'react-redux';
 
 // Components
-import {App} from './components/App';
+import {App} from './components/App.container';
 
 // Redux Store
 import {configureStore} from './store';
 
-export default class Root extends Component {
-  constructor() {
-    super();
-  }
-
-  // componentDidMount() {
-  //   FB.getLoginStatus((response) => console.log(response));
-  // }
-
-  render() {
-    return (
-      <Provider store={configureStore()}>
-        <App />
-      </Provider>
-    );
-  }
-}
+export const Root = () => (
+  <Provider store={configureStore()}>
+    <App />
+  </Provider>
+);

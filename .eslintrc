@@ -11,6 +11,7 @@
   "plugins": ["react-hooks"],
   "globals": {
     "document": true,
+    "FB": true,
     "google": true,
     "window": true
   },
