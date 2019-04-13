@@ -6,6 +6,7 @@
 export const getFBLoginStatus = () => async (dispatch) => {
   try {
     FB.getLoginStatus((response) => {
+      // console.log(response);
       if (response.status === 'connected') {
         dispatch({
           type: 'FB_LOGIN_STATUS_SUCCESS',

@@ -27,6 +27,10 @@ export class App extends Component {
     this.props.getFBLoginStatus();
   }
 
+  componentDidUpdate() {
+    this.props.getFBLoginStatus();
+  }
+
   render() {
     return (
       <Router>
