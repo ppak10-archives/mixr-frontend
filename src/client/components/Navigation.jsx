@@ -36,9 +36,11 @@ export const Navigation = () => (
           </Link>
         </li>
       </ul>
-      <button className="btn btn-primary" type="button">
-        Login with Facebook
-      </button>
+      <div
+        className="fb-login-button"
+        data-size="medium"
+        data-auto-logout-link="true"
+      />
     </div>
   </nav>
 );
