@@ -7,11 +7,10 @@
 import {REQUEST_DOMAIN} from '../constants/route';
 
 /**
- * Login in method to provide facebook token in exchange for session token
- * @param {object} fbToken
+ * Login in method to provide access token in exchange for session token
+ * @param {object} accessToken
  */
-export const getSessionObject = async (fbToken) => {
-  const accessToken = fbToken.accessToken.toString();
+export const getNewSessionObjectRoute = async (accessToken) => {
   const payload = {
     method: 'POST',
     headers: {

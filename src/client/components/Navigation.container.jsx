@@ -10,11 +10,11 @@ import {connect} from 'react-redux';
 import {Navigation as NavigationComponent} from './Navigation.component';
 
 // Actions
-import {getFBLoginStatus} from '../actions/facebook';
+// import {getFBLoginStatus} from '../actions/facebook';
 
-const mapDispatchToProps = (dispatch) => ({
-  getFBLoginStatus: () => dispatch(getFBLoginStatus()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   getFBLoginStatus: () => dispatch(getFBLoginStatus()),
+// });
 
 const mapStateToProps = (state) => ({
   sessionToken: state.authentication.sessionToken,
@@ -22,5 +22,5 @@ const mapStateToProps = (state) => ({
 
 export const Navigation = connect(
     mapStateToProps,
-    mapDispatchToProps,
+    // mapDispatchToProps,
 )(NavigationComponent);

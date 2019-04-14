@@ -27,9 +27,7 @@ export class App extends Component {
    * Checks if user has already logged in before by loading session token
    */
   componentDidMount() {
-    if (!this.props.sessionToken) {
-      this.props.loadSessionObject();
-    }
+    this.props.initializeFBAPI();
   }
 
   render() {
@@ -49,6 +47,7 @@ export class App extends Component {
 }
 
 App.propTypes = {
+  initializeFBAPI: ACTION,
   loadSessionObject: ACTION,
   sessionToken: STRING,
 };

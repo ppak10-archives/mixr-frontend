@@ -6,65 +6,92 @@
 // Actions
 import {createError} from './error';
 
+// API Routes
+import {getNewSessionObjectRoute} from '../api/authentication';
+
 /**
  * Login protocol to dispatch actions to get session token
  * @param {string} serviceType
+ * @param {string} accessToken
  * @return {null}
  */
-// export const getSessionObject = (serviceType) => async (dispatch) => {
-//   dispatch({type: 'STARTED_AUTHENTICATION'});
-//   switch (serviceType) {
-//     case 'FACEBOOK':
-//       try {
-//         const fbToken = await AccessToken.getCurrentAccessToken();
-//         const response = await getSessionObjectRoute(fbToken);
-//         if (response.session_token) {
-//           dispatch({type: 'VALID_FB_TOKEN'});
-//           await dispatch(storeSessionObject(response));
-//           await dispatch(removeFBPermissions());
-//           navigate('Authentication');
-//           dispatch({type: 'FINISHED_AUTHENTICATION'});
-//           dispatch(createAlert(finishedAuthentication()));
-//         } else {
-//           dispatch({type: 'INVALID_FB_TOKEN'});
-//           dispatch(removeFBPermissions());
-//         }
-//       } catch (err) {
-//         dispatch({type: 'FAILED_AUTHENTICATION'});
-//         dispatch(removeFBPermissions());
-//         // dispatch(createAlert(failedAuthentication()));
-//         dispatch(createError(err));
-//       }
-//   }
-// };
+export const getNewSessionObject = (serviceType, accessToken) => async (
+  dispatch,
+) => {
+  switch (serviceType) {
+    case 'FACEBOOK':
+      try {
+        const response = await getNewSessionObjectRoute(accessToken);
+        if (response.session_token) {
+          dispatch({type: 'VALID_FB_TOKEN'});
+          dispatch(storeSessionObject(response));
+        } else {
+          dispatch({type: 'INVALID_FB_TOKEN'});
+        }
+      } catch (err) {
+        dispatch(createError(err));
+      }
+  }
+};
 
-export const loadSessionObject = () => async (dispatch) => {
+/**
+ * Load session object cookie
+ * @return {boolean}
+ */
+export const loadSessionObject = () => (dispatch) => {
   try {
     const storedObject = localStorage.getItem('session');
     const sessionObject = JSON.parse(storedObject);
     if (sessionObject) {
       const {serviceType, sessionToken, userId} = sessionObject;
-      dispatch({type: 'LOADED_SESSION_OBJECT', serviceType, sessionToken});
-      dispatch({type: 'LOADED_USER_ID', userId});
+      dispatch({
+        type: 'LOAD_SESSION_OBJECT_SUCCESS',
+        serviceType,
+        sessionToken,
+      });
+      dispatch({
+        type: 'LOADED_USER_ID',
+        userId,
+      });
+      return true;
     } else {
-      dispatch({type: 'NO_SESSION_OBJECT'});
+      dispatch({
+        type: 'LOAD_SESSION_OBJECT_FAILURE',
+      });
+      return false;
     }
+  } catch (err) {
+    dispatch(createError(err));
+    return false;
+  }
+};
+
+/**
+ * Remove session object cookie for logout
+ * @return {null}
+ */
+export const removeSessionObject = () => (dispatch) => {
+  try {
+    localStorage.removeItem('session');
+    dispatch({
+      type: 'REMOVE_SESSION_OBJECT_SUCCESS',
+    });
   } catch (err) {
     dispatch(createError(err));
   }
 };
 
-// const storeSessionObject = (response) => async (dispatch) => {
-//   try {
-//     const sessionObject = {
-//       serviceType: response.service_type,
-//       sessionToken: response.session_token,
-//       userId: response.id,
-//     };
-//     localStorage.setItem('session', JSON.stringify(sessionObject));
-//     dispatch({type: 'STORED_SESSION_OBJECT'});
-//     await dispatch(loadSessionObject());
-//   } catch (err) {
-//     dispatch(createError(err));
-//   }
-// };
+const storeSessionObject = (response) => (dispatch) => {
+  try {
+    const sessionObject = {
+      serviceType: response.service_type,
+      sessionToken: response.session_token,
+      userId: response.id,
+    };
+    localStorage.setItem('session', JSON.stringify(sessionObject));
+    dispatch({type: 'STORED_SESSION_OBJECT'});
+    dispatch(loadSessionObject());
+  } catch (err) {
+    dispatch(createError(err));
+  }
+};

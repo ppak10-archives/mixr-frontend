@@ -3,21 +3,48 @@
  * Facebook actions
  */
 
-export const getFBLoginStatus = () => async (dispatch) => {
+// Actions
+import {
+  getNewSessionObject,
+  loadSessionObject,
+  removeSessionObject,
+} from './authentication';
+import {createError} from './error';
+
+export const initializeFBAPI = () => (dispatch) => {
   try {
-    FB.getLoginStatus((response) => {
-      // console.log(response);
-      if (response.status === 'connected') {
-        dispatch({
-          type: 'FB_LOGIN_STATUS_SUCCESS',
-        });
-      } else {
-        dispatch({
-          type: 'FB_LOGIN_STATUS_FAILURE',
-        });
-      }
-    }, true); // Forces roundtrip to facebook servers, not just cache
+    window.fbAsyncInit = () => {
+      FB.init({
+        appId: '232083774403273',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v3.2',
+      });
+      // Initializes subscription when page first loads
+      FB.getLoginStatus();
+      FB.Event.subscribe('auth.statusChange', (response) =>
+        dispatch(statusChange(response)),
+      );
+    };
   } catch (err) {
-    // console.log(err);
+    dispatch(createError(err));
+  }
+};
+
+const statusChange = (response) => (dispatch) => {
+  try {
+    const {authResponse, status} = response;
+    if (status === 'connected') {
+      // Attempt to load session object, otherwise create one
+      const sessionObjectStatus = dispatch(loadSessionObject());
+      if (!sessionObjectStatus) {
+        dispatch(getNewSessionObject('FACEBOOK', authResponse.accessToken));
+      }
+    } else {
+      // If status of FB login changes from connected, remove the session object
+      dispatch(removeSessionObject());
+    }
+  } catch (err) {
+    dispatch(createError(err));
   }
 };

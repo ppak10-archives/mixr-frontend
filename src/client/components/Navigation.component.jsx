@@ -5,25 +5,18 @@
 
 // Node Modules
 import React from 'react';
-import FacebookLogin from 'react-facebook-login';
 import {Link} from 'react-router-dom';
 
 // PropTypes
-import {ACTION, STRING} from '../constants/proptypes';
+import {STRING} from '../constants/proptypes';
 
 export const Navigation = (props) => {
-  const loginButtonHtml = props.sessionToken.length ? (
-    <button onClick={() => FB.logout(props.getFBLoginStatus)}>Logout</button>
-  ) : (
-    <FacebookLogin
-      appId="232083774403273"
-      fields="name,email,picture"
-      callback={props.getFBLoginStatus}
-      icon="fa-facebook"
-      size="small"
-      textButton="Login with Facebook"
-    />
-  );
+  // const loginButtonHtml = props.sessionToken.length ? (
+  //   <button onClick={() => FB.logout(props.getFBLoginStatus)}>Logout</button>
+  // ) : (
+
+  // );
+
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <button
@@ -53,13 +46,19 @@ export const Navigation = (props) => {
             </Link>
           </li>
         </ul>
-        {loginButtonHtml}
+        <div
+          className="fb-login-button"
+          data-size="medium"
+          data-button-type="login_with"
+          data-auto-logout-link="true"
+          data-use-continue-as="true"
+        />
       </div>
     </nav>
   );
 };
 
 Navigation.propTypes = {
-  getFBLoginStatus: ACTION,
+  // getFBLoginStatus: ACTION,
   sessionToken: STRING,
 };

@@ -4,7 +4,6 @@
  */
 
 const initialState = {
-  authenticating: false,
   fbPermissionsStatus: false,
   serviceType: null,
   sessionToken: '',
@@ -12,14 +11,14 @@ const initialState = {
 
 export const authentication = (state = initialState, {type, ...payload}) => {
   switch (type) {
-    case 'LOADED_SESSION_OBJECT':
+    case 'LOAD_SESSION_OBJECT_SUCCESS':
       return {
         ...state,
         serviceType: payload.serviceType,
         sessionToken: payload.sessionToken,
       };
-    case 'NO_SESSION_OBJECT':
-    case 'REMOVED_SESSION_OBJECT':
+    case 'LOAD_SESSION_OBJECT_FAILURE':
+    case 'REMOVE_SESSION_OBJECT_SUCCESS':
       return {
         ...state,
         serviceType: null,
@@ -47,17 +46,6 @@ export const authentication = (state = initialState, {type, ...payload}) => {
       return {
         ...state,
         fbPermissionsStatus: false,
-      };
-    case 'STARTED_AUTHENTICATION':
-      return {
-        ...state,
-        authenticating: true,
-      };
-    case 'FINISHED_AUTHENTICATION':
-    case 'FAILED_AUTHENTICATION':
-      return {
-        ...state,
-        authenticating: false,
       };
     default:
       return state;

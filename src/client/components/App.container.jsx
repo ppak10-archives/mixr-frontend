@@ -11,8 +11,10 @@ import {App as AppComponent} from './App.component';
 
 // Actions
 import {loadSessionObject} from '../actions/authentication';
+import {initializeFBAPI} from '../actions/facebook';
 
 const mapDispatchToProps = (dispatch) => ({
+  initializeFBAPI: () => dispatch(initializeFBAPI()),
   loadSessionObject: () => dispatch(loadSessionObject()),
 });
 
