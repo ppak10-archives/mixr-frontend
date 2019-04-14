@@ -12,7 +12,9 @@
   "globals": {
     "document": true,
     "FB": true,
+    "fetch": true,
     "google": true,
+    "localStorage": true,
     "window": true
   },
   "env": {

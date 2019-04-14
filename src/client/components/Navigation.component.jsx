@@ -9,10 +9,10 @@ import FacebookLogin from 'react-facebook-login';
 import {Link} from 'react-router-dom';
 
 // PropTypes
-import {ACTION_PROPTYPE, BOOLEAN_PROPTYPE} from '../constants/proptypes';
+import {ACTION, STRING} from '../constants/proptypes';
 
 export const Navigation = (props) => {
-  const loginButtonHtml = props.fbLoginStatus ? (
+  const loginButtonHtml = props.sessionToken.length ? (
     <button onClick={() => FB.logout(props.getFBLoginStatus)}>Logout</button>
   ) : (
     <FacebookLogin
@@ -60,6 +60,6 @@ export const Navigation = (props) => {
 };
 
 Navigation.propTypes = {
-  getFBLoginStatus: ACTION_PROPTYPE,
-  fbLoginStatus: BOOLEAN_PROPTYPE,
+  getFBLoginStatus: ACTION,
+  sessionToken: STRING,
 };

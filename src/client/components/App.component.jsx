@@ -1,5 +1,5 @@
 /**
- * App.jsx
+ * App.component.jsx
  * React app file
  */
 
@@ -15,9 +15,21 @@ import {AboutPage} from '../pages/About';
 import {EventsPage} from '../pages/Events';
 import {HomePage} from '../pages/Home';
 
+// Constants
+import {ACTION, STRING} from '../constants/proptypes';
+
 export class App extends Component {
   constructor() {
     super();
+  }
+
+  /**
+   * Checks if user has already logged in before by loading session token
+   */
+  componentDidMount() {
+    if (!this.props.sessionToken) {
+      this.props.loadSessionObject();
+    }
   }
 
   render() {
@@ -35,3 +47,8 @@ export class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  loadSessionObject: ACTION,
+  sessionToken: STRING,
+};

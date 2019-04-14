@@ -6,5 +6,6 @@
 // Node Modules
 import PropTypes from 'prop-types';
 
-export const ACTION_PROPTYPE = PropTypes.func.isRequired;
-export const BOOLEAN_PROPTYPE = PropTypes.bool.isRequired;
+export const ACTION = PropTypes.func.isRequired;
+export const BOOLEAN = PropTypes.bool.isRequired;
+export const STRING = PropTypes.string.isRequired;

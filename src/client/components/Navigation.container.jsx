@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  fbLoginStatus: state.authentication.fbLoginStatus,
+  sessionToken: state.authentication.sessionToken,
 });
 
 export const Navigation = connect(

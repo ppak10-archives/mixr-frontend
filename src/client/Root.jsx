@@ -8,7 +8,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 
 // Components
-import {App} from './components/App';
+import {App} from './components/App.container';
 
 // Redux Store
 import {configureStore} from './store';
