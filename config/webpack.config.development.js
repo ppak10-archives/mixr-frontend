@@ -4,7 +4,7 @@
  */
 
 // Node Modules
-const fs = require('fs');
+// const fs = require('fs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (directoryConfig) => {
@@ -16,11 +16,11 @@ module.exports = (directoryConfig) => {
     contentBase: directoryConfig.public,
     historyApiFallback: true,
     host: '0.0.0.0',
-    https: {
-      key: fs.readFileSync('/Users/ppak10/server.key'),
-      cert: fs.readFileSync('/Users/ppak10/server.crt'),
-      ca: fs.readFileSync('/Users/ppak10/rootCA.pem'),
-    },
+    // https: {
+    //   key: fs.readFileSync('/Users/ppak10/server.key'),
+    //   cert: fs.readFileSync('/Users/ppak10/server.crt'),
+    //   ca: fs.readFileSync('/Users/ppak10/rootCA.pem'),
+    // },
     port: 3000,
     publicPath: '/js/',
   };

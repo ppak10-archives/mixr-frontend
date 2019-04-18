@@ -8,7 +8,7 @@ import {REQUEST_DOMAIN} from '../constants/route';
 
 /**
  * Login in method to provide access token in exchange for session token
- * @param {object} accessToken
+ * @param {string} accessToken
  */
 export const getNewSessionObjectRoute = async (accessToken) => {
   const payload = {
