@@ -1,6 +1,6 @@
 /**
- * webpack.config.development.js
- * Webpack development build configurations
+ * webpack.config.devserver.js
+ * Webpack development server build configurations
  */
 
 // Node Modules

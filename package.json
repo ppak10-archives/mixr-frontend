@@ -4,8 +4,9 @@
   "description": "Front-end for mixr web app",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --env=development",
     "build": "webpack --env=production",
+    "backend": "webpack --watch --env=backend",
+    "devserver": "webpack-dev-server --env=devserver",
     "start": "npm run build; node src/server"
   },
   "lint-staged": {
