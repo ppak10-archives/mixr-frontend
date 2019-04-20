@@ -49,9 +49,6 @@ export const loadSessionObject = () => (dispatch) => {
         type: 'LOAD_SESSION_OBJECT_SUCCESS',
         serviceType,
         sessionToken,
-      });
-      dispatch({
-        type: 'LOADED_USER_ID',
         userId,
       });
       return true;

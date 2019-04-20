@@ -12,7 +12,7 @@ import {Navigation} from './Navigation';
 
 // Pages
 import {AboutPage} from '../pages/About';
-import {EventsPage} from '../pages/Events';
+import {EventsPage} from '../pages/Events.container';
 import {HomePage} from '../pages/Home';
 
 // Constants
@@ -24,7 +24,7 @@ export class App extends Component {
   }
 
   /**
-   * Checks if user has already logged in before by loading session token
+   * Checks if user has already logged in before by initializing facebook api
    */
   componentDidMount() {
     this.props.initializeFBAPI();

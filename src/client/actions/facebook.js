@@ -11,6 +11,10 @@ import {
 } from './authentication';
 import {createError} from './error';
 
+/**
+ * Initializes facebook api and subscribes to login status changes
+ * @return {null}
+ */
 export const initializeFBAPI = () => (dispatch) => {
   try {
     window.fbAsyncInit = () => {
@@ -32,6 +36,11 @@ export const initializeFBAPI = () => (dispatch) => {
   }
 };
 
+/**
+ * Updates redux state according to facebook user login status
+ * @param {object} response
+ * @return {null}
+ */
 const statusChange = (response) => (dispatch) => {
   try {
     const {authResponse, status} = response;
