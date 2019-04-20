@@ -23,10 +23,11 @@ export const getNewSessionObject = (serviceType, accessToken) => async (
       try {
         const response = await getNewSessionObjectRoute(accessToken);
         if (response.session_token) {
-          dispatch({type: 'VALID_FB_TOKEN'});
           dispatch(storeSessionObject(response));
         } else {
-          dispatch({type: 'INVALID_FB_TOKEN'});
+          dispatch({
+            type: 'FACEBOOK_AUTHENTICATION_FAILURE',
+          });
         }
       } catch (err) {
         dispatch(createError(err));

@@ -9,6 +9,5 @@ import React from 'react';
 export const AboutPage = () => (
   <>
     <p>About</p>
-    <p>test</p>
   </>
 );

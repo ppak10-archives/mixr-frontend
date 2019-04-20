@@ -14,6 +14,7 @@ export const authentication = (state = initialState, {type, ...payload}) => {
     case 'LOAD_SESSION_OBJECT_SUCCESS':
       return {
         ...state,
+        fbPermissionsStatus: true,
         serviceType: payload.serviceType,
         sessionToken: payload.sessionToken,
       };
@@ -21,6 +22,7 @@ export const authentication = (state = initialState, {type, ...payload}) => {
     case 'REMOVE_SESSION_OBJECT_SUCCESS':
       return {
         ...state,
+        fbPermissionsStatus: false,
         serviceType: null,
         sessionToken: '',
       };
@@ -37,12 +39,12 @@ export const authentication = (state = initialState, {type, ...payload}) => {
       return {
         ...state,
       };
-    case 'VALID_FB_TOKEN':
+    case 'FACEBOOK_AUTHENTICATION_SUCCESS':
       return {
         ...state,
         fbPermissionsStatus: true,
       };
-    case 'INVALID_FB_TOKEN':
+    case 'FACEBOOK_AUTHENTICATION_FAILURE':
       return {
         ...state,
         fbPermissionsStatus: false,

@@ -23,6 +23,7 @@ export const initializeFBAPI = () => (dispatch) => {
       // Initializes subscription when page first loads
       FB.getLoginStatus();
       FB.Event.subscribe('auth.statusChange', (response) =>
+        // Dispatches actions according to facebook authentication status change
         dispatch(statusChange(response)),
       );
     };
@@ -34,9 +35,11 @@ export const initializeFBAPI = () => (dispatch) => {
 const statusChange = (response) => (dispatch) => {
   try {
     const {authResponse, status} = response;
+    // console.log(response);
     if (status === 'connected') {
       // Attempt to load session object, otherwise create one
       const sessionObjectStatus = dispatch(loadSessionObject());
+      // console.log(sessionObjectStatus)
       if (!sessionObjectStatus) {
         dispatch(getNewSessionObject('FACEBOOK', authResponse.accessToken));
       }
