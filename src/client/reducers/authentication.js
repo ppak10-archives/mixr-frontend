@@ -4,6 +4,7 @@
  */
 
 const initialState = {
+  fbAccessToken: '',
   fbPermissionsStatus: false,
   serviceType: null,
   sessionToken: '',
@@ -27,28 +28,6 @@ export const authentication = (state = initialState, {type, ...payload}) => {
         sessionToken: '',
       };
     case 'STORED_SESSION_OBJECT':
-      return {
-        ...state,
-      };
-    case 'REMOVED_FB_PERMISSIONS':
-      return {
-        ...state,
-        fbPermissionsStatus: false,
-      };
-    case 'REMOVED_FB_PERMISSIONS_FAILED':
-      return {
-        ...state,
-      };
-    case 'FACEBOOK_AUTHENTICATION_SUCCESS':
-      return {
-        ...state,
-        fbPermissionsStatus: true,
-      };
-    case 'FACEBOOK_AUTHENTICATION_FAILURE':
-      return {
-        ...state,
-        fbPermissionsStatus: false,
-      };
     default:
       return state;
   }

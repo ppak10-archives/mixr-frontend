@@ -17,8 +17,8 @@ export const initializeFBAPI = () => (dispatch) => {
       FB.init({
         appId: '232083774403273',
         autoLogAppEvents: true,
-        xfbml: true,
         version: 'v3.2',
+        xfbml: true,
       });
       // Initializes subscription when page first loads
       FB.getLoginStatus();
@@ -35,11 +35,9 @@ export const initializeFBAPI = () => (dispatch) => {
 const statusChange = (response) => (dispatch) => {
   try {
     const {authResponse, status} = response;
-    // console.log(response);
     if (status === 'connected') {
       // Attempt to load session object, otherwise create one
       const sessionObjectStatus = dispatch(loadSessionObject());
-      // console.log(sessionObjectStatus)
       if (!sessionObjectStatus) {
         dispatch(getNewSessionObject('FACEBOOK', authResponse.accessToken));
       }
