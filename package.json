@@ -9,22 +9,6 @@
     "devserver": "webpack-dev-server --env=devserver",
     "start": "npm run build; node src/server"
   },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write --print-width 80",
-      "eslint --fix",
-      "git add ."
-    ],
-    "*.jsx": [
-      "prettier --write --print-width 80",
-      "eslint --fix",
-      "git add ."
-    ],
-    "*.less": [
-      "stylelint --fix",
-      "git add ."
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "ssh://git@feedmeyourdata.com:2222/diffusion/6/mixr-frontend.git"
@@ -44,11 +28,13 @@
     "jquery": "^3.3.1",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "moment": "^2.24.0",
     "popper.js": "^1.14.7",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
+    "react-datetime": "^2.16.3",
     "react-dom": "^16.8.4",
     "react-map-elements": "0.0.1",
     "react-redux": "^7.0.1",

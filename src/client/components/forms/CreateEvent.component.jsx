@@ -35,6 +35,15 @@ const CreateEventForm = () => {
             placeholder="1234 Main St"
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="inputAddress">Address</label>
+          <input
+            type="text"
+            className="form-control"
+            id="inputAddress"
+            placeholder="1234 Main St"
+          />
+        </div>
         <button className="btn btn-primary btn-block" type="submit">
           Create Event
         </button>
