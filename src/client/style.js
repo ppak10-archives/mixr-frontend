@@ -5,6 +5,7 @@
 
 // Node Modules
 import 'bootstrap'; // Imports bootstrap's javascript https://getbootstrap.com/docs/4.0/getting-started/javascript/
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// SCSS Styles
-import './stylesheets/main.scss';
+// Less Styles
+import './stylesheets/main.less';

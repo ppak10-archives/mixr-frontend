@@ -32,7 +32,7 @@ module.exports = (directoryConfig) => ({
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.scss$/,
+        test: /\.less$/,
         use: [
           {
             loader: 'style-loader', // Creates style nodes from js strings
@@ -49,7 +49,7 @@ module.exports = (directoryConfig) => ({
             },
           },
           {
-            loader: 'sass-loader', // Compiles scss code to css
+            loader: 'less-loader', // Compiles scss code to css
           },
         ],
       },
