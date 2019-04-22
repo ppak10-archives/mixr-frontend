@@ -4,8 +4,9 @@
  */
 
 // Node Modules
-import 'bootstrap'; // Imports bootstrap's javascript https://getbootstrap.com/docs/4.0/getting-started/javascript/
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap'; // Imports bootstrap's javascript
+import 'bootstrap/dist/css/bootstrap.min.css'; // Imports bootstrap's css
+import 'react-datetime/css/react-datetime.css'; // Imports react-datetime css
 
 // Less Styles
 import './stylesheets/main.less';

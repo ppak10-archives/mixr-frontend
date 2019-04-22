@@ -5,11 +5,22 @@
 
 // Node Modules
 import React from 'react';
+import * as Datetime from 'react-datetime';
 
 const CreateEventForm = () => {
   return (
     <div className="create-event-form-wrapper">
       <form>
+        <div className="form-row">
+          <div className="form-group col">
+            <label>Start Time</label>
+            <Datetime />
+          </div>
+          <div className="form-group col">
+            <label>End Time</label>
+            <Datetime />
+          </div>
+        </div>
         <div className="form-group">
           <label>Event Name</label>
           <input
@@ -24,15 +35,6 @@ const CreateEventForm = () => {
             className="form-control"
             placeholder="Event to connect with others over good food"
             rows="3"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="inputAddress">Address</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress"
-            placeholder="1234 Main St"
           />
         </div>
         <div className="form-group">
