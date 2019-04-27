@@ -4,27 +4,31 @@
  */
 
 // Node Modules
-import moment from 'moment';
 import React, {useState} from 'react';
 import * as Datetime from 'react-datetime';
 
+// Constants
+import {NOW, WEEKDAY_MONTH_DATE_FORMAT, YESTERDAY} from '../../constants/time';
+
 const CreateEventForm = () => {
   // State
-  const [timeStart, setTimeStart] = useState(moment());
-  const [timeEnd, setTimeEnd] = useState(moment());
+  const [description, setDescription] = useState('');
+  const [timeStart, setTimeStart] = useState(NOW);
+  const [timeEnd, setTimeEnd] = useState(NOW);
+  const [title, setTitle] = useState('');
 
   const datetimeFieldProps = {
     className: 'datetime-field',
-    dateFormat: 'dddd, MMMM Do',
+    dateFormat: WEEKDAY_MONTH_DATE_FORMAT,
     inputProps: {
       readOnly: true,
     },
   };
 
   // Callbacks
-  const onTimeStartChange = (date) => {
-    setTimeStart(date);
-    setTimeEnd(date);
+  const onTimeStartChange = (value) => {
+    setTimeStart(value);
+    setTimeEnd(value);
   };
 
   return (
@@ -36,7 +40,7 @@ const CreateEventForm = () => {
             <Datetime
               {...datetimeFieldProps}
               defaultValue={timeStart}
-              isValidDate={(date) => date.isAfter(moment().subtract(1, 'day'))}
+              isValidDate={(date) => date.isAfter(YESTERDAY)}
               onChange={onTimeStartChange}
             />
           </div>
@@ -55,20 +59,24 @@ const CreateEventForm = () => {
           <label>Event Name</label>
           <input
             className="form-control"
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Networking Dinner, Lunch Meeting, etc."
             type="text"
+            value={title}
           />
         </div>
         <div className="form-group">
           <label>Event Description</label>
           <textarea
             className="form-control"
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="Event to connect with others over good food"
             rows="3"
+            value={description}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="inputAddress">Address</label>
+          <label>Address</label>
           <input
             type="text"
             className="form-control"
