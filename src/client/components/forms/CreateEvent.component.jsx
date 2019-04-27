@@ -4,21 +4,51 @@
  */
 
 // Node Modules
-import React from 'react';
+import moment from 'moment';
+import React, {useState} from 'react';
 import * as Datetime from 'react-datetime';
 
 const CreateEventForm = () => {
+  // State
+  const [timeStart, setTimeStart] = useState(moment());
+  const [timeEnd, setTimeEnd] = useState(moment());
+
+  const datetimeFieldProps = {
+    className: 'datetime-field',
+    dateFormat: 'dddd, MMMM Do',
+    inputProps: {
+      readOnly: true,
+    },
+  };
+
+  // Callbacks
+  const onTimeStartChange = (date) => {
+    setTimeStart(date);
+    setTimeEnd(date);
+  };
+
   return (
     <div className="create-event-form-wrapper">
       <form>
         <div className="form-row">
           <div className="form-group col">
             <label>Start Time</label>
-            <Datetime />
+            <Datetime
+              {...datetimeFieldProps}
+              defaultValue={timeStart}
+              isValidDate={(date) => date.isAfter(moment().subtract(1, 'day'))}
+              onChange={onTimeStartChange}
+            />
           </div>
           <div className="form-group col">
             <label>End Time</label>
-            <Datetime />
+            <Datetime
+              {...datetimeFieldProps}
+              isValidDate={(date) => date.isAfter(timeStart)}
+              onChange={(value) => setTimeEnd(value)}
+              value={timeEnd}
+              viewMode="time"
+            />
           </div>
         </div>
         <div className="form-group">
