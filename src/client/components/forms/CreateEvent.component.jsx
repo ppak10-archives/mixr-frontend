@@ -9,10 +9,12 @@ import * as Datetime from 'react-datetime';
 
 // Constants
 import {NOW, WEEKDAY_MONTH_DATE_FORMAT, YESTERDAY} from '../../constants/time';
+import {ANACHRONISTIC_ERROR} from '../../constants/errors';
 
 const CreateEventForm = () => {
   // State
   const [description, setDescription] = useState('');
+  const [formErrors, setFormErrors] = useState(new Set());
   const [timeStart, setTimeStart] = useState(NOW);
   const [timeEnd, setTimeEnd] = useState(NOW);
   const [title, setTitle] = useState('');
@@ -31,8 +33,22 @@ const CreateEventForm = () => {
     setTimeEnd(value);
   };
 
+  const onTimeEndChange = (value) => {
+    setTimeEnd(value);
+    const validEndTime = timeStart.unix() <= value.unix();
+    if (!validEndTime && !formErrors.has(ANACHRONISTIC_ERROR)) {
+      setFormErrors(new Set(formErrors).add(ANACHRONISTIC_ERROR));
+    } else if (validEndTime && formErrors.has(ANACHRONISTIC_ERROR)) {
+      formErrors.delete(ANACHRONISTIC_ERROR);
+      setFormErrors(new Set(formErrors));
+    }
+  };
+
   return (
     <div className="create-event-form-wrapper">
+      {Array.from(formErrors).map((error, index) => (
+        <div key={index}>{error}</div>
+      ))}
       <form>
         <div className="form-row">
           <div className="form-group col">
@@ -49,7 +65,7 @@ const CreateEventForm = () => {
             <Datetime
               {...datetimeFieldProps}
               isValidDate={(date) => date.isAfter(timeStart)}
-              onChange={(value) => setTimeEnd(value)}
+              onChange={onTimeEndChange}
               value={timeEnd}
               viewMode="time"
             />
@@ -84,7 +100,11 @@ const CreateEventForm = () => {
             placeholder="1234 Main St"
           />
         </div>
-        <button className="btn btn-primary btn-block" type="submit">
+        <button
+          className="btn btn-primary btn-block"
+          disabled={formErrors.size}
+          type="submit"
+        >
           Create Event
         </button>
       </form>
