@@ -4,4 +4,4 @@
  */
 
 // Messages
-export const ANACHRONISTIC_ERROR = 'Time end cannot be before time start';
+export const ANACHRONISTIC_ERROR = 'End time cannot be before start time';

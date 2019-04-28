@@ -47,7 +47,9 @@ const CreateEventForm = () => {
   return (
     <div className="create-event-form-wrapper">
       {Array.from(formErrors).map((error, index) => (
-        <div key={index}>{error}</div>
+        <div className="alert alert-danger" key={index}>
+          {error}
+        </div>
       ))}
       <form>
         <div className="form-row">
@@ -55,9 +57,9 @@ const CreateEventForm = () => {
             <label>Start Time</label>
             <Datetime
               {...datetimeFieldProps}
-              defaultValue={timeStart}
               isValidDate={(date) => date.isAfter(YESTERDAY)}
               onChange={onTimeStartChange}
+              value={timeStart}
             />
           </div>
           <div className="form-group col">
@@ -102,7 +104,7 @@ const CreateEventForm = () => {
         </div>
         <button
           className="btn btn-primary btn-block"
-          disabled={formErrors.size}
+          disabled={formErrors.size || !title.length}
           type="submit"
         >
           Create Event
