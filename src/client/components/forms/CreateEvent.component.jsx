@@ -11,7 +11,7 @@ import * as Datetime from 'react-datetime';
 import {NOW, WEEKDAY_MONTH_DATE_FORMAT, YESTERDAY} from '../../constants/time';
 import {ANACHRONISTIC_ERROR} from '../../constants/errors';
 
-const CreateEventForm = () => {
+const CreateEventForm = (props) => {
   // State
   const [description, setDescription] = useState('');
   const [formErrors, setFormErrors] = useState(new Set());
