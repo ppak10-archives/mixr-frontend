@@ -1,0 +1,36 @@
+/**
+ * buttons.less
+ * Styles for button components
+ */
+
+.button-wrapper {
+  align-content: center;
+  display: flex;
+  left: 25%;
+  position: absolute;
+  width: 50%;
+  z-index: 1;
+
+  button {
+    border: 0.05em solid black;
+    border-radius: 1em;
+    margin: 0 0.5em;
+    outline: none;
+    flex: 1;
+    font-size: 125%;
+    padding: 0.25em 1em;
+    transition: 0.25s linear;
+  }
+}
+
+.button-wrapper-top {
+  &:extend(.button-wrapper all);
+
+  margin-top: 1em;
+}
+
+.button-wrapper-bottom {
+  &:extend(.button-wrapper all);
+
+  bottom: 5%;
+}

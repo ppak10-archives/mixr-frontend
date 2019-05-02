@@ -13,7 +13,7 @@ import {Navigation} from './Navigation';
 // Pages
 import {AboutPage} from '../pages/About';
 import {EventsPage} from '../pages/Events.container';
-import {HomePage} from '../pages/Home';
+import {HomePage} from '../pages/Home.container';
 
 // Constants
 import {ACTION, STRING} from '../constants/proptypes';
