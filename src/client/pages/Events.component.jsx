@@ -8,7 +8,7 @@ import React, {useState} from 'react';
 
 // Components
 import {CreateEventForm} from '../components/forms/CreateEvent.container';
-import {BaseMap, SearchInput} from 'react-map-elements';
+import {BaseMap, PlacesSearch} from 'react-map-elements';
 
 // Constants
 import {STRING} from '../constants/proptypes';
@@ -32,7 +32,7 @@ const EventsPage = (props) => {
   let createEventButtonHtml = '';
   if (props.sessionToken) {
     createEventButtonHtml = creatingEvent ? (
-      <SearchInput searchCallback={onSearch} />
+      <PlacesSearch searchCallback={onSearch} />
     ) : (
       <button
         className="btn btn-primary btn-lg btn-block"

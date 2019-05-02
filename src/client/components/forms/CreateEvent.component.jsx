@@ -1,6 +1,6 @@
 /**
  * CreateEvent.component.jsx
- * Form component htmlFor creating events
+ * Form component for creating events
  */
 
 // Node Modules
