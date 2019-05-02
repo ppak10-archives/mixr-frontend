@@ -15,47 +15,71 @@ import {STRING} from '../constants/proptypes';
 
 const EventsPage = (props) => {
   // State
-  const [coordinates, setCoordinates] = useState({lat: 40, lng: 40});
   const [creatingEvent, setCreatingEvent] = useState(false);
-
-  // Callbacks
-  const onSearch = (results, status) => {
-    if (status === 'OK') {
-      setCoordinates({
-        lat: results[0].geometry.location.lat(),
-        lng: results[0].geometry.location.lng(),
-      });
-    }
-  };
+  const [place, setPlace] = useState(null);
 
   // Html Elements
-  let createEventButtonHtml = '';
-  if (props.sessionToken) {
-    createEventButtonHtml = creatingEvent ? (
-      <PlacesSearch searchCallback={onSearch} />
+  const createEventButtonHtml =
+    props.sessionToken && creatingEvent ? (
+      <PlacesSearch searchCallback={(place) => setPlace(place)} />
     ) : (
-      <button
-        className="btn btn-primary btn-lg btn-block"
-        onClick={() => setCreatingEvent(!creatingEvent)}
-        type="button"
-      >
-        {creatingEvent ? 'Cancel' : 'Create Event'}
-      </button>
+      <div className="button-wrapper">
+        <button
+          disabled={!props.sessionToken}
+          onClick={() => setCreatingEvent(!creatingEvent)}
+        >
+          {!props.sessionToken
+            ? 'Please Login to Create an Event'
+            : 'Create Event'}
+        </button>
+      </div>
     );
-  }
 
-  const createEventForm =
-    creatingEvent && props.sessionToken ? (
-      <CreateEventForm coordinates={coordinates} />
-    ) : (
-      ''
-    );
   return (
-    <>
+    <div className="events-page-wrapper">
       {createEventButtonHtml}
       <BaseMap />
-      {createEventForm}
-    </>
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-toggle="modal"
+        data-target="#createEventModal"
+      >
+        Launch demo modal
+      </button>
+      <div className="modal fade" id="createEventModal">
+        <div className="modal-dialog modal-lg" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Modal title</h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <CreateEventForm place={place} />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" className="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
