@@ -11,22 +11,40 @@ import {CreateEventForm} from '../components/forms/CreateEvent.container';
 import {BaseMap, PlacesSearch} from 'react-map-elements';
 
 // Constants
+import {DEFAULT_LATITUDE, DEFAULT_LONGITUDE} from '../constants/map';
 import {STRING} from '../constants/proptypes';
 
 const EventsPage = (props) => {
   // State
-  const [creatingEvent, setCreatingEvent] = useState(false);
+  const [createEvent, setCreateEvent] = useState(false);
   const [place, setPlace] = useState(null);
+
+  const placeAddress = place ? place.formatted_address : 'Unknown Address';
+  const placeCoordinates = place
+    ? {
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    }
+    : {
+      lat: DEFAULT_LATITUDE,
+      lng: DEFAULT_LONGITUDE,
+    };
+
+  // Callbacks
+  const onCancel = () => {
+    setCreateEvent(!createEvent);
+    setPlace(null);
+  };
 
   // Html Elements
   const createEventButtonHtml =
-    props.sessionToken && creatingEvent ? (
+    props.sessionToken && createEvent ? (
       <PlacesSearch searchCallback={(place) => setPlace(place)} />
     ) : (
-      <div className="button-wrapper">
+      <div className="button-wrapper-top">
         <button
           disabled={!props.sessionToken}
-          onClick={() => setCreatingEvent(!creatingEvent)}
+          onClick={() => setCreateEvent(!createEvent)}
         >
           {!props.sessionToken
             ? 'Please Login to Create an Event'
@@ -35,23 +53,34 @@ const EventsPage = (props) => {
       </div>
     );
 
+  const continueCreateEventButtonHtml =
+    props.sessionToken && createEvent ? (
+      <div className="button-wrapper-bottom">
+        <button onClick={onCancel}>Cancel</button>
+        <button
+          data-target="#createEventModal"
+          data-toggle="modal"
+          disabled={!place}
+        >
+          Continue
+        </button>
+      </div>
+    ) : (
+      ''
+    );
+
   return (
     <div className="events-page-wrapper">
       {createEventButtonHtml}
       <BaseMap />
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-toggle="modal"
-        data-target="#createEventModal"
-      >
-        Launch demo modal
-      </button>
+      {continueCreateEventButtonHtml}
       <div className="modal fade" id="createEventModal">
         <div className="modal-dialog modal-lg" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title">Modal title</h5>
+              <h5 className="modal-title">
+                {`Creating event at ${placeAddress}`}
+              </h5>
               <button
                 type="button"
                 className="close"
@@ -62,19 +91,7 @@ const EventsPage = (props) => {
               </button>
             </div>
             <div className="modal-body">
-              <CreateEventForm place={place} />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
+              <CreateEventForm coordinates={placeCoordinates} />
             </div>
           </div>
         </div>

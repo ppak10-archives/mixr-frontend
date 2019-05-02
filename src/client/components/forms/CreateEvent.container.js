@@ -10,13 +10,12 @@ import {connect} from 'react-redux';
 import CreateEventFormComponent from './CreateEvent.component';
 
 // Actions
-// import {loadSessionObject} from '../actions/authentication';
-// import {initializeFBAPI} from '../actions/facebook';
+import {createEvent} from '../../actions/events';
 
-// const mapDispatchToProps = (dispatch) => ({
-//   initializeFBAPI: () => dispatch(initializeFBAPI()),
-//   loadSessionObject: () => dispatch(loadSessionObject()),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  createEvent: (sessionToken, eventObject) =>
+    dispatch(createEvent(sessionToken, eventObject)),
+});
 
 const mapStateToProps = (state) => ({
   sessionToken: state.authentication.sessionToken,
@@ -24,5 +23,5 @@ const mapStateToProps = (state) => ({
 
 export const CreateEventForm = connect(
     mapStateToProps,
-    // mapDispatchToProps,
+    mapDispatchToProps,
 )(CreateEventFormComponent);

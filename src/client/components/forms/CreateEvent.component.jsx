@@ -8,8 +8,9 @@ import React, {useState} from 'react';
 import * as Datetime from 'react-datetime';
 
 // Constants
-import {NOW, WEEKDAY_MONTH_DATE_FORMAT, YESTERDAY} from '../../constants/time';
 import {ANACHRONISTIC_ERROR} from '../../constants/errors';
+import {ACTION, COORDINATES, STRING} from '../../constants/proptypes';
+import {NOW, WEEKDAY_MONTH_DATE_FORMAT, YESTERDAY} from '../../constants/time';
 
 const CreateEventForm = (props) => {
   // State
@@ -42,6 +43,22 @@ const CreateEventForm = (props) => {
       formErrors.delete(ANACHRONISTIC_ERROR);
       setFormErrors(new Set(formErrors));
     }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const eventObject = {
+      capacity: 0,
+      description,
+      fee: 0.0,
+      icon_url: '',
+      lat: props.coordinates.lat,
+      lng: props.coordinates.lng,
+      time_end: timeEnd.unix(),
+      time_start: timeStart.unix(),
+      title,
+    };
+    props.createEvent(props.sessionToken, eventObject);
   };
 
   return (
@@ -93,25 +110,22 @@ const CreateEventForm = (props) => {
             value={description}
           />
         </div>
-        <div className="form-group">
-          <label>Address</label>
-          <input
-            type="text"
-            className="form-control"
-            id="inputAddress"
-            placeholder="1234 Main St"
-          />
-        </div>
         <button
           className="btn btn-primary btn-block"
           disabled={formErrors.size || !title.length}
-          type="submit"
+          onClick={onSubmit}
         >
           Create Event
         </button>
       </form>
     </div>
   );
+};
+
+CreateEventForm.propTypes = {
+  coordinates: COORDINATES,
+  createEvent: ACTION,
+  sessionToken: STRING,
 };
 
 export default CreateEventForm;
