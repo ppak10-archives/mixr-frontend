@@ -6,6 +6,9 @@
 // Node Modules
 import React, {useEffect} from 'react';
 
+// Components
+import {EventCard} from '../components/EventCard';
+
 // Constants
 import {ACTION, EVENTS, STRING} from '../constants/proptypes';
 
@@ -24,14 +27,9 @@ const EventsPage = (props) => {
   }
   // Html Elements
   const eventsHtml = props.sessionToken ? (
-    <div className="event-cards-wrapper card-columns">
+    <div className="event-cards-wrapper">
       {props.hostEvents.map((event) => (
-        <div key={event.id} className="card text-white bg-primary">
-          <div className="card-header">{event.title}</div>
-          <div className="card-body">
-            <p>{event.description}</p>
-          </div>
-        </div>
+        <EventCard event={event} key={event.id} />
       ))}
     </div>
   ) : (
