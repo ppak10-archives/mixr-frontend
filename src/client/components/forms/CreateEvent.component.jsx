@@ -9,17 +9,12 @@ import * as Datetime from 'react-datetime';
 
 // Constants
 import {ANACHRONISTIC_ERROR} from '../../constants/errors';
-import {ACTION, COORDINATES, STRING} from '../../constants/proptypes';
+import {ACTION, COORDINATES, STATUS, STRING} from '../../constants/proptypes';
 import {NOW, WEEKDAY_MONTH_DATE_FORMAT, YESTERDAY} from '../../constants/time';
 
 const CreateEventForm = (props) => {
-  // State
-  const [description, setDescription] = useState('');
-  const [formErrors, setFormErrors] = useState(new Set());
-  const [timeStart, setTimeStart] = useState(NOW);
-  const [timeEnd, setTimeEnd] = useState(NOW);
-  const [title, setTitle] = useState('');
-
+  // Props
+  const {createEventStatus} = props;
   const datetimeFieldProps = {
     className: 'datetime-field',
     dateFormat: WEEKDAY_MONTH_DATE_FORMAT,
@@ -27,6 +22,13 @@ const CreateEventForm = (props) => {
       readOnly: true,
     },
   };
+
+  // State
+  const [description, setDescription] = useState('');
+  const [formErrors, setFormErrors] = useState(new Set());
+  const [timeStart, setTimeStart] = useState(NOW);
+  const [timeEnd, setTimeEnd] = useState(NOW);
+  const [title, setTitle] = useState('');
 
   // Callbacks
   const onTimeStartChange = (value) => {
@@ -112,10 +114,10 @@ const CreateEventForm = (props) => {
         </div>
         <button
           className="btn btn-primary btn-block"
-          disabled={formErrors.size || !title.length}
+          disabled={formErrors.size || !title.length || createEventStatus.start}
           onClick={onSubmit}
         >
-          Create Event
+          {createEventStatus.start ? 'Creating Event...' : 'Create Event'}
         </button>
       </form>
     </div>
@@ -125,6 +127,7 @@ const CreateEventForm = (props) => {
 CreateEventForm.propTypes = {
   coordinates: COORDINATES,
   createEvent: ACTION,
+  createEventStatus: STATUS,
   sessionToken: STRING,
 };
 

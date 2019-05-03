@@ -4,42 +4,44 @@
  */
 
 // Constants
-import {STATUS_OBJECT} from '../constants/reducers';
+import {
+  STATUS_INITIAL,
+  STATUS_START,
+  STATUS_SUCCESS,
+} from '../constants/reducers';
 
 const initialState = {
-  createEventStatus: STATUS_OBJECT,
-  getHostEventsStatus: STATUS_OBJECT,
+  createEventStatus: STATUS_INITIAL,
+  getHostEventsStatus: STATUS_INITIAL,
   hostEvents: [],
 };
 
 export const events = (state = initialState, {type, ...payload}) => {
   switch (type) {
+    case 'CREATE_EVENT_INITIAL':
+      return {
+        ...state,
+        createEventStatus: STATUS_INITIAL,
+      };
     case 'CREATE_EVENT_START':
       return {
         ...state,
-        createEventStatus: {
-          ...state.createEventStatus,
-          start: true,
-          success: false,
-        },
+        createEventStatus: STATUS_START,
+      };
+    case 'CREATE_EVENT_SUCCESS':
+      return {
+        ...state,
+        createEventStatus: STATUS_SUCCESS,
       };
     case 'GET_HOST_EVENTS_START':
       return {
         ...state,
-        getHostEventsStatus: {
-          ...state.getHostEventsStatus,
-          start: true,
-          success: false,
-        },
+        getHostEventsStatus: STATUS_START,
       };
     case 'GET_HOST_EVENTS_SUCCESS':
       return {
         ...state,
-        getHostEventsStatus: {
-          ...state.getHostEventsStatus,
-          start: false,
-          success: true,
-        },
+        getHostEventsStatus: STATUS_SUCCESS,
         hostEvents: payload.events,
       };
     default:

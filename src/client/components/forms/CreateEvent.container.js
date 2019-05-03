@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   sessionToken: state.authentication.sessionToken,
+  createEventStatus: state.events.createEventStatus,
 });
 
 export const CreateEventForm = connect(

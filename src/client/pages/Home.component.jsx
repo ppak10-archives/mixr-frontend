@@ -4,7 +4,8 @@
  */
 
 // Node Modules
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import Modal from 'react-bootstrap/Modal';
 
 // Components
 import {CreateEventForm} from '../components/forms/CreateEvent.container';
@@ -12,12 +13,16 @@ import {BaseMap, PlacesSearch} from 'react-map-elements';
 
 // Constants
 import {DEFAULT_LATITUDE, DEFAULT_LONGITUDE} from '../constants/map';
-import {STRING} from '../constants/proptypes';
+import {ACTION, REACT_ROUTER, STATUS, STRING} from '../constants/proptypes';
 
 const HomePage = (props) => {
+  // Props
+  const {createEventStatus, history, resetEventStatus} = props;
+
   // State
   const [createEvent, setCreateEvent] = useState(false);
   const [place, setPlace] = useState(null);
+  const [modalVisibility, setModalVisibility] = useState(false);
 
   const placeAddress = place ? place.formatted_address : 'Unknown Address';
   const placeCoordinates = place
@@ -29,6 +34,15 @@ const HomePage = (props) => {
       lat: DEFAULT_LATITUDE,
       lng: DEFAULT_LONGITUDE,
     };
+
+  // Effects
+  useEffect(() => {
+    if (createEventStatus.success) {
+      setModalVisibility(false);
+      resetEventStatus();
+      history.push('/events');
+    }
+  }, [createEventStatus, history, resetEventStatus]);
 
   // Callbacks
   const onCancel = () => {
@@ -57,11 +71,7 @@ const HomePage = (props) => {
     props.sessionToken && createEvent ? (
       <div className="button-wrapper-bottom">
         <button onClick={onCancel}>Cancel</button>
-        <button
-          data-target="#createEventModal"
-          data-toggle="modal"
-          disabled={!place}
-        >
+        <button disabled={!place} onClick={() => setModalVisibility(true)}>
           Continue
         </button>
       </div>
@@ -74,33 +84,22 @@ const HomePage = (props) => {
       {createEventButtonHtml}
       <BaseMap />
       {continueCreateEventButtonHtml}
-      <div className="modal fade" id="createEventModal">
-        <div className="modal-dialog modal-lg" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">
-                {`Creating event at ${placeAddress}`}
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <CreateEventForm coordinates={placeCoordinates} />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Modal show={modalVisibility} onHide={() => setModalVisibility(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>{`Creating event at ${placeAddress}`}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CreateEventForm coordinates={placeCoordinates} />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
 
 HomePage.propTypes = {
+  ...REACT_ROUTER,
+  createEventStatus: STATUS,
+  resetEventStatus: ACTION,
   sessionToken: STRING,
 };
 

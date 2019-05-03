@@ -18,7 +18,11 @@ export const createEvent = (sessionToken, eventObject) => async (dispatch) => {
       type: 'CREATE_EVENT_START',
     });
     const response = await createEventRoute(sessionToken, eventObject);
-    return response;
+    if (response.status == 200) {
+      dispatch({
+        type: 'CREATE_EVENT_SUCCESS',
+      });
+    }
   } catch (err) {
     dispatch(createError(err));
   }

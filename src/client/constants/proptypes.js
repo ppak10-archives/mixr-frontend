@@ -5,13 +5,23 @@
 
 // Node Modules
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
+// Base PropTypes
 export const ACTION = PropTypes.func.isRequired;
 export const BOOLEAN = PropTypes.bool.isRequired;
 export const FUNCTION = PropTypes.func.isRequired;
 export const NUMBER = PropTypes.number.isRequired;
 export const STRING = PropTypes.string.isRequired;
 
+// React Router PropTypes
+export const REACT_ROUTER = {
+  history: ReactRouterPropTypes.history.isRequired,
+  location: ReactRouterPropTypes.location.isRequired,
+  match: ReactRouterPropTypes.match.isRequired,
+};
+
+// Specific PropTypes
 export const COORDINATES = PropTypes.shape({
   lat: NUMBER,
   lng: NUMBER,
@@ -31,3 +41,9 @@ export const EVENT = PropTypes.shape({
 });
 
 export const EVENTS = PropTypes.arrayOf(EVENT);
+
+export const STATUS = PropTypes.shape({
+  failure: BOOLEAN,
+  start: BOOLEAN,
+  success: BOOLEAN,
+});
