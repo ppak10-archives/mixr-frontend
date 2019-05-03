@@ -10,3 +10,6 @@ import moment from 'moment';
 export const NOW = moment();
 export const WEEKDAY_MONTH_DATE_FORMAT = 'dddd, MMMM Do'; // Friday, April 26th
 export const YESTERDAY = moment().subtract(1, 'day');
+
+// Units
+export const MILLISECONDS_PER_SECOND = 1000;

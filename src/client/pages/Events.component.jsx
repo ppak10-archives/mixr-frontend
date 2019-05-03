@@ -4,15 +4,36 @@
  */
 
 // Node Modules
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // Constants
-import {STRING} from '../constants/proptypes';
+import {ACTION, EVENTS, STRING} from '../constants/proptypes';
 
 const EventsPage = (props) => {
+  const {getHostEvents, sessionToken} = props;
+  // Effects
+  useEffect(() => {
+    if (sessionToken) {
+      getHostEvents(sessionToken);
+    }
+  }, [getHostEvents, sessionToken]);
+
+  const test = [];
+  for (let i = 0; i < 100; i++) {
+    test.push(i);
+  }
   // Html Elements
   const eventsHtml = props.sessionToken ? (
-    <p>Events Cards</p>
+    <div className="event-cards-wrapper card-columns">
+      {props.hostEvents.map((event) => (
+        <div key={event.id} className="card text-white bg-primary">
+          <div className="card-header">{event.title}</div>
+          <div className="card-body">
+            <p>{event.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
   ) : (
     <p>Please login to view events</p>
   );
@@ -21,6 +42,8 @@ const EventsPage = (props) => {
 };
 
 EventsPage.propTypes = {
+  getHostEvents: ACTION,
+  hostEvents: EVENTS,
   sessionToken: STRING,
 };
 

@@ -16,3 +16,18 @@ export const COORDINATES = PropTypes.shape({
   lat: NUMBER,
   lng: NUMBER,
 }).isRequired;
+
+export const EVENT = PropTypes.shape({
+  capacity: NUMBER,
+  description: STRING,
+  fee: NUMBER,
+  icon_url: STRING,
+  id: NUMBER,
+  lat: NUMBER,
+  lng: NUMBER,
+  time_end: NUMBER,
+  time_start: NUMBER,
+  title: STRING,
+});
+
+export const EVENTS = PropTypes.arrayOf(EVENT);

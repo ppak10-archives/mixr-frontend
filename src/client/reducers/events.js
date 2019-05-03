@@ -3,12 +3,13 @@
  * Reducers for events actions
  */
 
+// Constants
+import {STATUS_OBJECT} from '../constants/reducers';
+
 const initialState = {
-  createStatus: {
-    failure: false,
-    start: false,
-    success: false,
-  },
+  createEventStatus: STATUS_OBJECT,
+  getHostEventsStatus: STATUS_OBJECT,
+  hostEvents: [],
 };
 
 export const events = (state = initialState, {type, ...payload}) => {
@@ -16,10 +17,30 @@ export const events = (state = initialState, {type, ...payload}) => {
     case 'CREATE_EVENT_START':
       return {
         ...state,
-        createStatus: {
-          ...state.createStatus,
+        createEventStatus: {
+          ...state.createEventStatus,
           start: true,
+          success: false,
         },
+      };
+    case 'GET_HOST_EVENTS_START':
+      return {
+        ...state,
+        getHostEventsStatus: {
+          ...state.getHostEventsStatus,
+          start: true,
+          success: false,
+        },
+      };
+    case 'GET_HOST_EVENTS_SUCCESS':
+      return {
+        ...state,
+        getHostEventsStatus: {
+          ...state.getHostEventsStatus,
+          start: false,
+          success: true,
+        },
+        hostEvents: payload.events,
       };
     default:
       return state;
