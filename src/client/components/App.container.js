@@ -1,5 +1,5 @@
 /**
- * App.container.jsx
+ * App.container.js
  * Container for app component
  */
 

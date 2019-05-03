@@ -8,7 +8,7 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 // Components
-import {Navigation} from './Navigation';
+import {Navigation} from './Navigation.container';
 
 // Pages
 import {AboutPage} from '../pages/About';
