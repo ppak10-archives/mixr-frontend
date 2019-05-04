@@ -12,6 +12,7 @@ import {Navigation} from './Navigation.container';
 
 // Pages
 import {AboutPage} from '../pages/About';
+import {EventPage} from '../pages/Event.container';
 import {EventsPage} from '../pages/Events.container';
 import {HomePage} from '../pages/Home.container';
 
@@ -37,7 +38,8 @@ export class App extends Component {
         <div className="page">
           <Switch>
             <Route exact path="/" component={HomePage} />
-            <Route path="/events" component={EventsPage} />
+            <Route exact path="/events" component={EventsPage} />
+            <Route path="/events/:eventId" component={EventPage} />
             <Route path="/about" component={AboutPage} />
           </Switch>
         </div>

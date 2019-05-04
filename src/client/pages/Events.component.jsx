@@ -47,7 +47,9 @@ const EventsPage = (props) => {
       </div>
     </div>
   ) : (
-    <p>Please login to view events</p>
+    <div className="center-layout-wrapper">
+      <h3>Please Login to View Your Events</h3>
+    </div>
   );
 
   return (
