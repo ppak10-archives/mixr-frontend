@@ -3,6 +3,12 @@
  * Constants used within reducers
  */
 
+export const SHOW_EVENTS_NONE = {
+  showPastEvents: false,
+  showStartedEvents: false,
+  showUpcomingEvents: false,
+};
+
 export const STATUS_INITIAL = {
   failure: false,
   start: false,
