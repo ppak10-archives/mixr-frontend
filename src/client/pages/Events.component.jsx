@@ -8,6 +8,7 @@ import React, {useEffect} from 'react';
 
 // Components
 import {EventCard} from '../components/EventCard';
+import {Sidebar} from '../components/Sidebar';
 
 // Constants
 import {ACTION, EVENTS, STRING} from '../constants/proptypes';
@@ -21,22 +22,25 @@ const EventsPage = (props) => {
     }
   }, [getHostEvents, sessionToken]);
 
-  const test = [];
-  for (let i = 0; i < 100; i++) {
-    test.push(i);
-  }
   // Html Elements
   const eventsHtml = props.sessionToken ? (
     <div className="event-cards-wrapper">
-      {props.hostEvents.map((event) => (
-        <EventCard event={event} key={event.id} />
-      ))}
+      <div className="event-cards-grid">
+        {props.hostEvents.map((event) => (
+          <EventCard event={event} key={event.id} />
+        ))}
+      </div>
     </div>
   ) : (
     <p>Please login to view events</p>
   );
 
-  return <>{eventsHtml}</>;
+  return (
+    <>
+      <Sidebar />
+      {eventsHtml}
+    </>
+  );
 };
 
 EventsPage.propTypes = {

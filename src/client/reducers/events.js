@@ -42,7 +42,7 @@ export const events = (state = initialState, {type, ...payload}) => {
       return {
         ...state,
         getHostEventsStatus: STATUS_SUCCESS,
-        hostEvents: payload.events,
+        hostEvents: payload.events.reverse(),
       };
     default:
       return state;

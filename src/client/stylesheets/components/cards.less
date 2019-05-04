@@ -3,36 +3,40 @@
  * Styles for event cards
  */
 
-.text-ellipsis-cutoff {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .event-cards-wrapper {
-  display: grid;
-  grid-gap: 1em;
-  grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
-  list-style: none;
-  padding: 1em;
+  flex: 1;
+  position: relative;
 
-  .event-card {
-    .header {
-      display: flex;
-      height: 15em;
-      padding: 0;
-    }
+  .event-cards-grid {
+    bottom: 0;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+    left: 0;
+    overflow: auto;
+    position: absolute;
+    padding: 1em;
+    right: 0;
+    top: 0;
 
-    .body {
-      display: flex;
-      flex-direction: column;
-
-      .description {
-        &:extend(.text-ellipsis-cutoff);
+    .event-card {
+      .header {
+        display: flex;
+        height: 15em;
+        padding: 0;
       }
 
-      .title {
-        &:extend(.text-ellipsis-cutoff);
+      .body {
+        display: flex;
+        flex-direction: column;
+
+        .description {
+          &:extend(.text-ellipsis-cutoff);
+        }
+
+        .title {
+          &:extend(.text-ellipsis-cutoff);
+        }
       }
     }
   }
