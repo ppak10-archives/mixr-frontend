@@ -9,6 +9,7 @@ import React, {useEffect} from 'react';
 
 // Components
 import {EventCard} from '../components/EventCard';
+import {EventTogglebar} from '../components/EventTogglebar.container';
 import {Sidebar} from '../components/Sidebar';
 
 // Constants
@@ -39,25 +40,25 @@ const EventsPage = (props) => {
 
   // Html Elements
   const eventsHtml = props.sessionToken ? (
-    <div className="event-cards-wrapper">
-      <div className="event-cards-grid">
-        {filteredEvents.map((event) => (
-          <EventCard event={event} key={event.id} />
-        ))}
+    <>
+      <Sidebar>
+        <EventTogglebar />
+      </Sidebar>
+      <div className="event-cards-wrapper">
+        <div className="event-cards-grid">
+          {filteredEvents.map((event) => (
+            <EventCard event={event} key={event.id} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   ) : (
     <div className="center-layout-wrapper">
       <h3>Please Login to View Your Events</h3>
     </div>
   );
 
-  return (
-    <>
-      <Sidebar />
-      {eventsHtml}
-    </>
-  );
+  return eventsHtml;
 };
 
 EventsPage.propTypes = {

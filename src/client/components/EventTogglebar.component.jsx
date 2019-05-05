@@ -12,7 +12,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import {ACTION, BOOLEAN} from '../constants/proptypes';
 
 const EventTogglebar = (props) => (
-  <>
+  <div className="event-togglebar-wrapper">
     <h5>Show Events</h5>
     <ButtonGroup vertical>
       <Button
@@ -37,7 +37,7 @@ const EventTogglebar = (props) => (
         Past
       </Button>
     </ButtonGroup>
-  </>
+  </div>
 );
 
 EventTogglebar.propTypes = {

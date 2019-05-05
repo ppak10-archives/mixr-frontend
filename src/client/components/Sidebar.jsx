@@ -6,13 +6,13 @@
 // Node Modules
 import React from 'react';
 
-// Components
-import {EventTogglebar} from './EventTogglebar.container';
+// Constants
+import {COMPONENT} from '../constants/proptypes';
 
-export const Sidebar = () => {
-  return (
-    <div className="sidebar-wrapper">
-      <EventTogglebar />
-    </div>
-  );
+export const Sidebar = (props) => {
+  return <div className="sidebar-wrapper">{props.children}</div>;
+};
+
+Sidebar.propTypes = {
+  children: COMPONENT,
 };

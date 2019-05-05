@@ -9,6 +9,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 
 // Base PropTypes
 export const ACTION = PropTypes.func.isRequired;
+export const COMPONENT = PropTypes.node;
 export const BOOLEAN = PropTypes.bool.isRequired;
 export const FUNCTION = PropTypes.func.isRequired;
 export const NUMBER = PropTypes.number.isRequired;
