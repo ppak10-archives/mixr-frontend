@@ -23,6 +23,11 @@ export const createEventRoute = async (sessionToken, eventObject) => {
   return response.json();
 };
 
+export const getEventByIdRoute = async (sessionToken, eventId) => {
+  const route = `${REQUEST_DOMAIN}/events/${eventId}`;
+  return await getRequest(sessionToken, route);
+};
+
 export const getHostEventsRoute = async (sessionToken) => {
   const route = `${REQUEST_DOMAIN}/events/host`;
   return await getRequest(sessionToken, route);

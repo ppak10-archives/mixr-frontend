@@ -14,6 +14,8 @@ import {
 const initialState = {
   ...SHOW_EVENTS_NONE,
   createEventStatus: STATUS_INITIAL,
+  eventDetails: {},
+  getEventByIdStatus: STATUS_INITIAL,
   getHostEventsStatus: STATUS_INITIAL,
   hostEvents: [],
   showUpcomingEvents: true,
@@ -35,6 +37,17 @@ export const events = (state = initialState, {type, ...payload}) => {
       return {
         ...state,
         createEventStatus: STATUS_SUCCESS,
+      };
+    case 'GET_EVENT_BY_ID_START':
+      return {
+        ...state,
+        getEventByIdStatus: STATUS_START,
+      };
+    case 'GET_EVENT_BY_ID_SUCCESS':
+      return {
+        ...state,
+        getEventByIdStatus: STATUS_SUCCESS,
+        eventDetails: payload.eventDetails,
       };
     case 'GET_HOST_EVENTS_START':
       return {

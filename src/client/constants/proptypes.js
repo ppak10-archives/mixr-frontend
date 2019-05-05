@@ -28,18 +28,21 @@ export const COORDINATES = PropTypes.shape({
   lng: NUMBER,
 }).isRequired;
 
-export const EVENT = PropTypes.shape({
-  capacity: NUMBER,
-  description: STRING,
-  fee: NUMBER,
-  icon_url: STRING,
-  id: NUMBER,
-  lat: NUMBER,
-  lng: NUMBER,
-  time_end: NUMBER,
-  time_start: NUMBER,
-  title: STRING,
-});
+export const EVENT = PropTypes.oneOfType([
+  PropTypes.shape({
+    capacity: NUMBER,
+    description: STRING,
+    fee: NUMBER,
+    icon_url: STRING,
+    id: NUMBER,
+    lat: NUMBER,
+    lng: NUMBER,
+    time_end: NUMBER,
+    time_start: NUMBER,
+    title: STRING,
+  }),
+  PropTypes.shape({}),
+]);
 
 export const EVENTS = PropTypes.arrayOf(EVENT);
 

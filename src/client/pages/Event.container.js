@@ -7,13 +7,14 @@
 import {connect} from 'react-redux';
 
 // Actions
-import {getHostEvents} from '../actions/events';
+import {getEventById} from '../actions/events';
 
 // Components
 import EventPageComponent from './Event.component';
 
 const mapDispatchToProps = (dispatch) => ({
-  getHostEvents: (sessionToken) => dispatch(getHostEvents(sessionToken)),
+  getEventById: (sessionToken, eventId) =>
+    dispatch(getEventById(sessionToken, eventId)),
 });
 
 const mapStateToProps = (state) => ({

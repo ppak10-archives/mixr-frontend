@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 
 // Components
 import {CreateEventForm} from '../components/forms/CreateEvent.container';
-import {BaseMap, PlacesSearch} from 'react-map-elements';
+import {DynamicMap, PlacesSearch} from 'react-map-elements';
 
 // Constants
 import {DEFAULT_LATITUDE, DEFAULT_LONGITUDE} from '../constants/map';
@@ -20,20 +20,15 @@ const HomePage = (props) => {
   const {createEventStatus, history, resetEventStatus} = props;
 
   // State
+  const [coordinates, setCoordinates] = useState({
+    lat: DEFAULT_LATITUDE,
+    lng: DEFAULT_LONGITUDE,
+  });
   const [createEvent, setCreateEvent] = useState(false);
   const [place, setPlace] = useState(null);
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const placeAddress = place ? place.formatted_address : 'Unknown Address';
-  const placeCoordinates = place
-    ? {
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng(),
-    }
-    : {
-      lat: DEFAULT_LATITUDE,
-      lng: DEFAULT_LONGITUDE,
-    };
 
   // Effects
   useEffect(() => {
@@ -50,10 +45,18 @@ const HomePage = (props) => {
     setPlace(null);
   };
 
+  const onPlace = (place) => {
+    setPlace(place);
+    setCoordinates({
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    });
+  };
+
   // Html Elements
   const createEventButtonHtml =
     props.sessionToken && createEvent ? (
-      <PlacesSearch searchCallback={(place) => setPlace(place)} />
+      <PlacesSearch searchCallback={onPlace} />
     ) : (
       <div className="button-wrapper-top">
         <button
@@ -82,14 +85,14 @@ const HomePage = (props) => {
   return (
     <>
       {createEventButtonHtml}
-      <BaseMap />
+      <DynamicMap coordinates={coordinates} />
       {continueCreateEventButtonHtml}
       <Modal show={modalVisibility} onHide={() => setModalVisibility(false)}>
         <Modal.Header closeButton>
           <Modal.Title>{`Creating event at ${placeAddress}`}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CreateEventForm coordinates={placeCoordinates} />
+          <CreateEventForm coordinates={coordinates} />
         </Modal.Body>
       </Modal>
     </>

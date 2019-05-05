@@ -7,7 +7,11 @@
 import {createError} from './error';
 
 // API
-import {createEventRoute, getHostEventsRoute} from '../api/events';
+import {
+  createEventRoute,
+  getEventByIdRoute,
+  getHostEventsRoute,
+} from '../api/events';
 
 // Constants
 import {MILLISECONDS_PER_SECOND} from '../constants/time';
@@ -21,6 +25,25 @@ export const createEvent = (sessionToken, eventObject) => async (dispatch) => {
     if (response.status == 200) {
       dispatch({
         type: 'CREATE_EVENT_SUCCESS',
+      });
+    }
+  } catch (err) {
+    dispatch(createError(err));
+  }
+};
+
+export const getEventById = (sessionToken, eventId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: 'GET_EVENT_BY_ID_START',
+    });
+    const response = await getEventByIdRoute(sessionToken, eventId);
+    if (response.status === 200) {
+      response.time_end *= MILLISECONDS_PER_SECOND;
+      response.time_start *= MILLISECONDS_PER_SECOND;
+      dispatch({
+        type: 'GET_EVENT_BY_ID_SUCCESS',
+        eventDetails: response.data,
       });
     }
   } catch (err) {
