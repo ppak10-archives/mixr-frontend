@@ -19,6 +19,7 @@ const initialState = {
   getHostEventsStatus: STATUS_INITIAL,
   hostEvents: [],
   showUpcomingEvents: true,
+  updateEventByIdStatus: STATUS_INITIAL,
 };
 
 export const events = (state = initialState, {type, ...payload}) => {
@@ -77,6 +78,16 @@ export const events = (state = initialState, {type, ...payload}) => {
         ...state,
         ...SHOW_EVENTS_NONE,
         showUpcomingEvents: !state.showUpcomingEvents,
+      };
+    case 'UPDATE_EVENT_BY_ID_START':
+      return {
+        ...state,
+        updateEventByIdStatus: STATUS_START,
+      };
+    case 'UPDATE_EVENT_BY_ID_SUCCESS':
+      return {
+        ...state,
+        updateEventByIdStatus: STATUS_SUCCESS,
       };
     default:
       return state;

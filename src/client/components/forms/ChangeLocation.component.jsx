@@ -9,7 +9,7 @@ import {DynamicMap, PlacesSearch} from 'react-map-elements';
 
 // Constants
 import {DEFAULT_LATITUDE, DEFAULT_LONGITUDE} from '../../constants/map';
-import {EVENT, STATUS} from '../../constants/proptypes';
+import {ACTION, EVENT, STATUS, STRING} from '../../constants/proptypes';
 
 const ChangeLocationForm = ({eventDetails, getEventByIdStatus, ...props}) => {
   // State
@@ -49,7 +49,11 @@ const ChangeLocationForm = ({eventDetails, getEventByIdStatus, ...props}) => {
   };
 
   const onSubmit = () => {
-    // console.log(place);
+    props.updateEventById(props.sessionToken, eventDetails.id, {
+      lat: coordinates.lat,
+      lng: coordinates.lng,
+    });
+    props.getEventById(props.sessionToken, eventDetails.id);
   };
 
   // Html Elements
@@ -85,7 +89,10 @@ const ChangeLocationForm = ({eventDetails, getEventByIdStatus, ...props}) => {
 
 ChangeLocationForm.propTypes = {
   eventDetails: EVENT,
+  getEventById: ACTION,
   getEventByIdStatus: STATUS,
+  sessionToken: STRING,
+  updateEventById: ACTION,
 };
 
 export default ChangeLocationForm;

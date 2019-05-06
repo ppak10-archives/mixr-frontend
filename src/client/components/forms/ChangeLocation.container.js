@@ -7,7 +7,7 @@
 import {connect} from 'react-redux';
 
 // Actions
-import {getEventById} from '../../actions/events';
+import {getEventById, updateEventById} from '../../actions/events';
 
 // Components
 import ChangeLocationFormComponent from './ChangeLocation.component';
@@ -15,6 +15,8 @@ import ChangeLocationFormComponent from './ChangeLocation.component';
 const mapDispatchToProps = (dispatch) => ({
   getEventById: (sessionToken, eventId) =>
     dispatch(getEventById(sessionToken, eventId)),
+  updateEventById: (sessionToken, eventId, eventObject) =>
+    dispatch(updateEventById(sessionToken, eventId, eventObject)),
 });
 
 const mapStateToProps = (state) => ({

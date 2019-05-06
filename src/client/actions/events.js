@@ -11,6 +11,7 @@ import {
   createEventRoute,
   getEventByIdRoute,
   getHostEventsRoute,
+  updateEventByIdRoute,
 } from '../api/events';
 
 // Constants
@@ -66,6 +67,28 @@ export const getHostEvents = (sessionToken) => async (dispatch) => {
       dispatch({
         type: 'GET_HOST_EVENTS_SUCCESS',
         events: response.data.events,
+      });
+    }
+  } catch (err) {
+    dispatch(createError(err));
+  }
+};
+
+export const updateEventById = (sessionToken, eventId, eventObject) => async (
+  dispatch,
+) => {
+  try {
+    dispatch({
+      type: 'UPDATE_EVENT_BY_ID_START',
+    });
+    const response = await updateEventByIdRoute(
+        sessionToken,
+        eventId,
+        eventObject,
+    );
+    if (response.status == 200) {
+      dispatch({
+        type: 'UPDATE_EVENT_BY_ID_SUCCESS',
       });
     }
   } catch (err) {
