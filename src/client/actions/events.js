@@ -40,8 +40,8 @@ export const getEventById = (sessionToken, eventId) => async (dispatch) => {
     });
     const response = await getEventByIdRoute(sessionToken, eventId);
     if (response.status === 200) {
-      response.time_end *= MILLISECONDS_PER_SECOND;
-      response.time_start *= MILLISECONDS_PER_SECOND;
+      response.data.time_end *= MILLISECONDS_PER_SECOND;
+      response.data.time_start *= MILLISECONDS_PER_SECOND;
       dispatch({
         type: 'GET_EVENT_BY_ID_SUCCESS',
         eventDetails: response.data,

@@ -13,7 +13,17 @@ import {EventDetailsForm} from './EventDetails';
 import {ACTION, EVENT, STATUS, STRING} from '../../constants/proptypes';
 
 const ChangeInfoForm = ({eventDetails, getEventByIdStatus, ...props}) => {
-  return <EventDetailsForm formType="update" />;
+  // Callbacks
+  const onUpdate = (eventObject) => {
+    props.updateEventById(props.sessionToken, eventDetails.id, eventObject);
+  };
+  return (
+    <EventDetailsForm
+      eventDetails={eventDetails}
+      formType="update"
+      onSubmit={onUpdate}
+    />
+  );
 };
 
 ChangeInfoForm.propTypes = {

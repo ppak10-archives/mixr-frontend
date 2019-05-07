@@ -4,7 +4,7 @@
  */
 
 // Node Modules
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -12,19 +12,66 @@ import * as Datetime from 'react-datetime';
 
 // Constants
 import {ANACHRONISTIC_ERROR} from '../../constants/errors';
-import {ACTION, COORDINATES, STATUS, STRING} from '../../constants/proptypes';
-import {NOW, WEEKDAY_MONTH_DATE_FORMAT, YESTERDAY} from '../../constants/time';
+import {EVENT, FUNCTION, STRING} from '../../constants/proptypes';
+import {
+  MILLISECONDS_PER_SECOND,
+  NOW,
+  WEEKDAY_MONTH_DATE_FORMAT,
+  YESTERDAY,
+} from '../../constants/time';
 
-export const EventDetailsForm = ({...props}) => {
+export const EventDetailsForm = ({eventDetails, ...props}) => {
   // State
   const [description, setDescription] = useState('');
   const [editMode, setEditMode] = useState(false);
   const [formErrors, setFormErrors] = useState(new Set());
-  const [timeStart, setTimeStart] = useState(NOW);
+  const [eventObject, setEventObject] = useState({});
   const [timeEnd, setTimeEnd] = useState(NOW);
+  const [timeStart, setTimeStart] = useState(NOW);
   const [title, setTitle] = useState('');
+  const [validSubmit, setValidSubmit] = useState(false);
+
+  // Effects
+  useEffect(() => {
+    if (Object.entries(eventDetails).length) {
+      setDescription(eventDetails.description);
+      setTimeEnd(eventDetails.time_end);
+      setTimeStart(eventDetails.time_start);
+      setTitle(eventDetails.title);
+    }
+  }, [eventDetails]);
+
+  useEffect(() => {
+    setEventObject({
+      description,
+      title,
+      time_end: timeEnd / MILLISECONDS_PER_SECOND,
+      time_start: timeStart / MILLISECONDS_PER_SECOND,
+    });
+    if (
+      editMode &&
+      (eventDetails.description !== description ||
+        eventDetails.time_end !== timeEnd ||
+        eventDetails.time_start !== timeStart ||
+        eventDetails.title !== title)
+    ) {
+      setValidSubmit(true);
+    } else {
+      setValidSubmit(false);
+    }
+  }, [editMode, eventDetails, description, timeEnd, timeStart, title]);
 
   // Callbacks
+  const onToggleEdit = () => {
+    if (editMode) {
+      setDescription(eventDetails.description);
+      setTimeEnd(eventDetails.time_end);
+      setTimeStart(eventDetails.time_start);
+      setTitle(eventDetails.title);
+    }
+    setEditMode(!editMode);
+  };
+
   const onTimeStartChange = (value) => {
     setTimeStart(value);
     setTimeEnd(value);
@@ -41,22 +88,6 @@ export const EventDetailsForm = ({...props}) => {
     }
   };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   const eventObject = {
-  //     capacity: 0,
-  //     description,
-  //     fee: 0.0,
-  //     icon_url: '',
-  //     lat: props.coordinates.lat,
-  //     lng: props.coordinates.lng,
-  //     time_end: timeEnd.unix(),
-  //     time_start: timeStart.unix(),
-  //     title,
-  //   };
-  //   props.createEvent(props.sessionToken, eventObject);
-  // };
-
   // Component Props
   const datetimeFieldProps = {
     dateFormat: WEEKDAY_MONTH_DATE_FORMAT,
@@ -69,10 +100,19 @@ export const EventDetailsForm = ({...props}) => {
   // Html Elements
   const updateHeaderHtml =
     props.formType === 'update' ? (
-      <div>
-        <Button onClick={() => setEditMode(!editMode)} variant="primary">
-          {editMode ? 'Cancel' : 'Edit'}
-        </Button>
+      <div className="update-header">
+        <div className="left">
+          <Button onClick={onToggleEdit} variant="primary">
+            {editMode ? 'Cancel' : 'Edit'}
+          </Button>
+        </div>
+        {validSubmit ? (
+          <Button onClick={() => props.onSubmit(eventObject)} variant="success">
+            Save
+          </Button>
+        ) : (
+          ''
+        )}
       </div>
     ) : (
       ''
@@ -131,11 +171,9 @@ export const EventDetailsForm = ({...props}) => {
 };
 
 EventDetailsForm.propTypes = {
-  coordinates: COORDINATES,
-  createEvent: ACTION,
-  createEventStatus: STATUS,
+  eventDetails: EVENT,
   formType: STRING,
-  sessionToken: STRING,
+  onSubmit: FUNCTION,
 };
 
 EventDetailsForm.defaultProps = {
