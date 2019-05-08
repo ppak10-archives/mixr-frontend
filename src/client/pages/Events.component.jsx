@@ -8,8 +8,8 @@ import moment from 'moment';
 import React, {useEffect} from 'react';
 
 // Components
-import {EventCard} from '../components/EventCard';
-import {EventTogglebar} from '../components/EventTogglebar.container';
+import {EventCard} from '../components/events/EventCard';
+import {EventsTogglebar} from '../components/events/Togglebar.container';
 import {Sidebar} from '../components/Sidebar';
 
 // Constants
@@ -19,7 +19,7 @@ const EventsPage = (props) => {
   // Props
   const {getHostEvents, sessionToken} = props;
 
-  // filters
+  // Filters
   const pastEventFilter = (event) => event.time_end < moment();
   const startedEventFilter = (event) =>
     event.time_start <= moment() && event.time_end >= moment();
@@ -40,9 +40,9 @@ const EventsPage = (props) => {
 
   // Html Elements
   const eventsHtml = props.sessionToken ? (
-    <>
+    <div className="flex-layout-wrapper">
       <Sidebar>
-        <EventTogglebar />
+        <EventsTogglebar />
       </Sidebar>
       <div className="event-cards-wrapper">
         <div className="event-cards-grid">
@@ -51,7 +51,7 @@ const EventsPage = (props) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   ) : (
     <div className="center-layout-wrapper">
       <h3>Please Login to View Your Events</h3>

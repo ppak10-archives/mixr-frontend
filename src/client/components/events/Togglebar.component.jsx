@@ -1,6 +1,6 @@
 /**
- * EventTogglebar.component.jsx
- * Component for event togglebar to filter events
+ * Togglebar.component.jsx
+ * Component for events togglebar to filter events
  */
 
 // Node Modules
@@ -9,9 +9,9 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 // Constants
-import {ACTION, BOOLEAN} from '../constants/proptypes';
+import {ACTION, BOOLEAN} from '../../constants/proptypes';
 
-const EventTogglebar = (props) => (
+const EventsTogglebar = (props) => (
   <div className="event-togglebar-wrapper">
     <h5>Show Events</h5>
     <ButtonGroup vertical>
@@ -40,7 +40,7 @@ const EventTogglebar = (props) => (
   </div>
 );
 
-EventTogglebar.propTypes = {
+EventsTogglebar.propTypes = {
   showPastEvents: BOOLEAN,
   showStartedEvents: BOOLEAN,
   showUpcomingEvents: BOOLEAN,
@@ -49,4 +49,4 @@ EventTogglebar.propTypes = {
   toggleShowUpcomingEvents: ACTION,
 };
 
-export default EventTogglebar;
+export default EventsTogglebar;

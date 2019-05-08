@@ -19,7 +19,7 @@ const EventInfo = ({eventDetails, getEventByIdStatus, ...props}) => {
   };
 
   return (
-    <div className="flex-layout-wrapper">
+    <div className="padded-flex-layout-wrapper">
       <EventDetailsForm
         eventDetails={eventDetails}
         formType="update"

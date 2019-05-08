@@ -7,6 +7,7 @@
 import {DEFAULT_LATITUDE, DEFAULT_LONGITUDE} from '../constants/map';
 
 const initialState = {
+  alerts: [],
   eventInterests: [],
   gettingInterests: false,
   gettingLocation: false,
@@ -20,6 +21,16 @@ const initialState = {
 
 export const self = (state = initialState, {type, ...payload}) => {
   switch (type) {
+    case 'CREATE_ALERT':
+      return {
+        ...state,
+        alerts: [...state.alerts, payload.alertObject],
+      };
+    case 'REMOVE_ALERT':
+      return {
+        ...state,
+        alerts: state.alerts.filter((_alert, index) => index !== 0),
+      };
     case 'GETTING_LOCATION':
       return {
         ...state,

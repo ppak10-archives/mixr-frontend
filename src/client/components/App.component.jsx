@@ -8,6 +8,7 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 // Components
+import {Alerts} from './Alerts.container';
 import {Navigation} from './Navigation.container';
 
 // Pages
@@ -36,6 +37,7 @@ export class App extends Component {
       <Router>
         <Navigation />
         <div className="page">
+          <Alerts />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/events" component={EventsPage} />

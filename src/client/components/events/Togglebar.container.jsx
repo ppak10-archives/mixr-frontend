@@ -1,13 +1,13 @@
 /**
- * EventTogglebar.container.js
- * Container for event togglebar component
+ * Togglebar.container.js
+ * Container for events togglebar component
  */
 
 // Node Modules
 import {connect} from 'react-redux';
 
 // Components
-import EventTogglebarComponent from './EventTogglebar.component';
+import EventsTogglebarComponent from './Togglebar.component';
 
 const mapDispathToProps = (dispatch) => ({
   toggleShowPastEvents: () =>
@@ -30,7 +30,7 @@ const mapStateToProps = (state) => ({
   showUpcomingEvents: state.events.showUpcomingEvents,
 });
 
-export const EventTogglebar = connect(
+export const EventsTogglebar = connect(
     mapStateToProps,
     mapDispathToProps,
-)(EventTogglebarComponent);
+)(EventsTogglebarComponent);

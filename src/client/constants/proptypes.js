@@ -23,6 +23,13 @@ export const REACT_ROUTER = {
 };
 
 // Specific PropTypes
+export const ALERT = PropTypes.shape({
+  message: STRING,
+  type: STRING,
+});
+
+export const ALERTS = PropTypes.arrayOf(ALERT);
+
 export const COORDINATES = PropTypes.shape({
   lat: NUMBER,
   lng: NUMBER,

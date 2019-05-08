@@ -14,23 +14,28 @@ body {
   height: 100%;
 }
 
-.page {
+.flex-layout-wrapper {
   display: flex;
   flex: 1;
   height: 100%;
+}
+
+.page {
+  &:extend(.flex-layout-wrapper);
+
+  flex-direction: column;
 
   .center-layout-wrapper {
+    &:extend(.flex-layout-wrapper);
+
     align-items: center;
-    display: flex;
-    flex: 1;
-    height: 100%;
     justify-content: center;
     position: relative;
   }
 
-  .flex-layout-wrapper {
-    flex: 1;
-    height: 100%;
+  .padded-flex-layout-wrapper {
+    &:extend(.flex-layout-wrapper);
+
     padding: 1em;
   }
 }

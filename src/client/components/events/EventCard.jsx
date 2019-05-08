@@ -12,7 +12,7 @@ import {StaticMap} from 'react-map-elements';
 import {withRouter} from 'react-router-dom';
 
 // Constants
-import {EVENT, REACT_ROUTER} from '../constants/proptypes';
+import {EVENT, REACT_ROUTER} from '../../constants/proptypes';
 
 const EventCardComponent = (props) => (
   <Card

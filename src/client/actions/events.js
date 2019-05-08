@@ -4,6 +4,7 @@
  */
 
 // Actions
+import {createAlert} from './alerts';
 import {createError} from './error';
 
 // API
@@ -17,6 +18,12 @@ import {
 // Constants
 import {MILLISECONDS_PER_SECOND} from '../constants/time';
 
+/**
+ * Creates an event with event object
+ * @param {string} sessionToken
+ * @param {object} eventObject
+ * @return {int} eventId
+ */
 export const createEvent = (sessionToken, eventObject) => async (dispatch) => {
   try {
     dispatch({
@@ -27,6 +34,7 @@ export const createEvent = (sessionToken, eventObject) => async (dispatch) => {
       dispatch({
         type: 'CREATE_EVENT_SUCCESS',
       });
+      return response.id;
     }
   } catch (err) {
     dispatch(createError(err));
@@ -90,6 +98,12 @@ export const updateEventById = (sessionToken, eventId, eventObject) => async (
       dispatch({
         type: 'UPDATE_EVENT_BY_ID_SUCCESS',
       });
+      dispatch(
+          createAlert({
+            type: 'success',
+            message: 'Saved Updates',
+          }),
+      );
       dispatch(getEventById(sessionToken, eventId));
     }
   } catch (err) {

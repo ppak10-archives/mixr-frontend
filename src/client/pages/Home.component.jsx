@@ -4,7 +4,7 @@
  */
 
 // Node Modules
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import {DynamicMap, PlacesSearch} from 'react-map-elements';
 
@@ -27,28 +27,24 @@ const HomePage = ({createEventStatus, history, resetEventStatus, ...props}) => {
 
   const placeAddress = place ? place.formatted_address : 'Unknown Address';
 
-  // Effects
-  useEffect(() => {
-    if (createEventStatus.success) {
-      setModalVisibility(false);
-      resetEventStatus();
-      history.push('/events');
-    }
-  }, [createEventStatus, history, resetEventStatus]);
-
   // Callbacks
   const onCancel = () => {
     setCreateEvent(!createEvent);
     setPlace(null);
   };
 
-  const onCreate = (eventObject) => {
+  const onCreate = async (eventObject) => {
     eventObject.capacity = 0;
     eventObject.fee = 0.0;
     eventObject.icon_url = '';
     eventObject.lat = coordinates.lat;
     eventObject.lng = coordinates.lng;
-    props.createEvent(props.sessionToken, eventObject);
+    const eventId = await props.createEvent(props.sessionToken, eventObject);
+    if (eventId) {
+      setModalVisibility(false);
+      resetEventStatus();
+      history.push(`/events/${eventId}`);
+    }
   };
 
   const onPlace = (place) => {

@@ -32,7 +32,7 @@ const EventPage = ({getEventById, sessionToken, match, ...props}) => {
 
   // Html Elements
   const eventPageHtml = sessionToken ? (
-    <>
+    <div className="flex-layout-wrapper">
       <Sidebar>
         <Link className={linkClassName('info')} to={`${match.url}/info`}>
           Info
@@ -46,7 +46,7 @@ const EventPage = ({getEventById, sessionToken, match, ...props}) => {
         <Route path={`${match.url}/map`} component={ChangeLocationForm} />
         <Route path={`${match.url}/info`} component={EventInfo} />
       </Switch>
-    </>
+    </div>
   ) : (
     <div className="center-layout-wrapper">
       <h3>Please Login to View Event</h3>
