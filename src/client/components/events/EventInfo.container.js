@@ -1,5 +1,5 @@
 /**
- * ChangeInfo.container.js
+ * EventInfo.container.js
  * Container for change info component
  */
 
@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import {getEventById, updateEventById} from '../../actions/events';
 
 // Components
-import ChangeInfoFormComponent from './ChangeInfo.component';
+import EventInfoComponent from './EventInfo.component';
 
 const mapDispatchToProps = (dispatch) => ({
   getEventById: (sessionToken, eventId) =>
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
   sessionToken: state.authentication.sessionToken,
 });
 
-export const ChangeInfoForm = connect(
+export const EventInfo = connect(
     mapStateToProps,
     mapDispatchToProps,
-)(ChangeInfoFormComponent);
+)(EventInfoComponent);

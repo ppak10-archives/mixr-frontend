@@ -90,6 +90,7 @@ export const updateEventById = (sessionToken, eventId, eventObject) => async (
       dispatch({
         type: 'UPDATE_EVENT_BY_ID_SUCCESS',
       });
+      dispatch(getEventById(sessionToken, eventId));
     }
   } catch (err) {
     dispatch(createError(err));

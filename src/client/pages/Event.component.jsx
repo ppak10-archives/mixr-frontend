@@ -10,7 +10,7 @@ import {Link, Redirect, Route, Switch} from 'react-router-dom';
 
 // Components
 import {ChangeLocationForm} from '../components/forms/ChangeLocation.container';
-import {ChangeInfoForm} from '../components/forms/ChangeInfo.container';
+import {EventInfo} from '../components/events/EventInfo.container';
 import {Sidebar} from '../components/Sidebar';
 
 // Constants
@@ -44,7 +44,7 @@ const EventPage = ({getEventById, sessionToken, match, ...props}) => {
       <Switch>
         <Redirect exact from={match.url} to={`${match.url}/info`} />
         <Route path={`${match.url}/map`} component={ChangeLocationForm} />
-        <Route path={`${match.url}/info`} component={ChangeInfoForm} />
+        <Route path={`${match.url}/info`} component={EventInfo} />
       </Switch>
     </>
   ) : (

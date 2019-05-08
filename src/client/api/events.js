@@ -19,7 +19,7 @@ export const createEventRoute = async (sessionToken, eventObject) => {
     },
     body: JSON.stringify(eventObject),
   };
-  const response = await fetch(`${REQUEST_DOMAIN}/events`, payload);
+  const response = await fetch(`${REQUEST_DOMAIN}/events/`, payload);
   return response.json();
 };
 

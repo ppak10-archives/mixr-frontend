@@ -6,19 +6,16 @@
 // Node Modules
 import React, {useEffect, useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
+import {DynamicMap, PlacesSearch} from 'react-map-elements';
 
 // Components
-import {CreateEventForm} from '../components/forms/CreateEvent.container';
-import {DynamicMap, PlacesSearch} from 'react-map-elements';
+import {EventDetailsForm} from '../components/forms/EventDetails';
 
 // Constants
 import {DEFAULT_LATITUDE, DEFAULT_LONGITUDE} from '../constants/map';
 import {ACTION, REACT_ROUTER, STATUS, STRING} from '../constants/proptypes';
 
-const HomePage = (props) => {
-  // Props
-  const {createEventStatus, history, resetEventStatus} = props;
-
+const HomePage = ({createEventStatus, history, resetEventStatus, ...props}) => {
   // State
   const [coordinates, setCoordinates] = useState({
     lat: DEFAULT_LATITUDE,
@@ -43,6 +40,15 @@ const HomePage = (props) => {
   const onCancel = () => {
     setCreateEvent(!createEvent);
     setPlace(null);
+  };
+
+  const onCreate = (eventObject) => {
+    eventObject.capacity = 0;
+    eventObject.fee = 0.0;
+    eventObject.icon_url = '';
+    eventObject.lat = coordinates.lat;
+    eventObject.lng = coordinates.lng;
+    props.createEvent(props.sessionToken, eventObject);
   };
 
   const onPlace = (place) => {
@@ -87,12 +93,16 @@ const HomePage = (props) => {
       {createEventButtonHtml}
       <DynamicMap coordinates={coordinates} />
       {continueCreateEventButtonHtml}
-      <Modal show={modalVisibility} onHide={() => setModalVisibility(false)}>
+      <Modal
+        show={modalVisibility}
+        size="lg"
+        onHide={() => setModalVisibility(false)}
+      >
         <Modal.Header closeButton>
           <Modal.Title>{`Creating event at ${placeAddress}`}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CreateEventForm coordinates={coordinates} />
+          <EventDetailsForm onSubmit={onCreate} />
         </Modal.Body>
       </Modal>
     </>
@@ -101,6 +111,7 @@ const HomePage = (props) => {
 
 HomePage.propTypes = {
   ...REACT_ROUTER,
+  createEvent: ACTION,
   createEventStatus: STATUS,
   resetEventStatus: ACTION,
   sessionToken: STRING,

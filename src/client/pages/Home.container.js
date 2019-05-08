@@ -6,10 +6,15 @@
 // Node Modules
 import {connect} from 'react-redux';
 
+// Actions
+import {createEvent} from '../actions/events';
+
 // Components
 import HomePageComponent from './Home.component';
 
 const mapDispathToProps = (dispatch) => ({
+  createEvent: (sessionToken, eventObject) =>
+    dispatch(createEvent(sessionToken, eventObject)),
   resetEventStatus: () =>
     dispatch({
       type: 'CREATE_EVENT_INITIAL',

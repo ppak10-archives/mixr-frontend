@@ -1,32 +1,35 @@
 /**
- * ChangeInfo.component.jsx
- * Form component to change event information
+ * EventInfo.component.jsx
+ * Form component to view and change event information
  */
 
 // Node Modules
 import React from 'react';
 
 // Components
-import {EventDetailsForm} from './EventDetails';
+import {EventDetailsForm} from '../forms/EventDetails';
 
 // Constants
 import {ACTION, EVENT, STATUS, STRING} from '../../constants/proptypes';
 
-const ChangeInfoForm = ({eventDetails, getEventByIdStatus, ...props}) => {
+const EventInfo = ({eventDetails, getEventByIdStatus, ...props}) => {
   // Callbacks
   const onUpdate = (eventObject) => {
     props.updateEventById(props.sessionToken, eventDetails.id, eventObject);
   };
+
   return (
-    <EventDetailsForm
-      eventDetails={eventDetails}
-      formType="update"
-      onSubmit={onUpdate}
-    />
+    <div className="flex-layout-wrapper">
+      <EventDetailsForm
+        eventDetails={eventDetails}
+        formType="update"
+        onSubmit={onUpdate}
+      />
+    </div>
   );
 };
 
-ChangeInfoForm.propTypes = {
+EventInfo.propTypes = {
   eventDetails: EVENT,
   getEventById: ACTION,
   getEventByIdStatus: STATUS,
@@ -34,4 +37,4 @@ ChangeInfoForm.propTypes = {
   updateEventById: ACTION,
 };
 
-export default ChangeInfoForm;
+export default EventInfo;

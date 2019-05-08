@@ -20,7 +20,7 @@ import {
   YESTERDAY,
 } from '../../constants/time';
 
-export const EventDetailsForm = ({eventDetails, ...props}) => {
+export const EventDetailsForm = ({eventDetails, formType, ...props}) => {
   // State
   const [description, setDescription] = useState('');
   const [editMode, setEditMode] = useState(false);
@@ -33,13 +33,15 @@ export const EventDetailsForm = ({eventDetails, ...props}) => {
 
   // Effects
   useEffect(() => {
-    if (Object.entries(eventDetails).length) {
+    if (formType === 'update' && Object.entries(eventDetails).length) {
       setDescription(eventDetails.description);
       setTimeEnd(eventDetails.time_end);
       setTimeStart(eventDetails.time_start);
       setTitle(eventDetails.title);
+    } else if (formType === 'create') {
+      setEditMode(true);
     }
-  }, [eventDetails]);
+  }, [eventDetails, formType]);
 
   useEffect(() => {
     setEventObject({
@@ -99,7 +101,7 @@ export const EventDetailsForm = ({eventDetails, ...props}) => {
 
   // Html Elements
   const updateHeaderHtml =
-    props.formType === 'update' ? (
+    formType === 'update' ? (
       <div className="update-header">
         <div className="left">
           <Button onClick={onToggleEdit} variant="primary">
@@ -114,6 +116,19 @@ export const EventDetailsForm = ({eventDetails, ...props}) => {
           ''
         )}
       </div>
+    ) : (
+      ''
+    );
+
+  const createFooterHtml =
+    formType === 'create' ? (
+      <Button
+        disabled={formErrors.size || !title.length}
+        onClick={() => props.onSubmit(eventObject)}
+        variant="primary"
+      >
+        Create Event
+      </Button>
     ) : (
       ''
     );
@@ -166,6 +181,7 @@ export const EventDetailsForm = ({eventDetails, ...props}) => {
           />
         </Form.Group>
       </Form>
+      {createFooterHtml}
     </div>
   );
 };
@@ -177,5 +193,6 @@ EventDetailsForm.propTypes = {
 };
 
 EventDetailsForm.defaultProps = {
+  eventDetails: {},
   formType: 'create',
 };
