@@ -19,8 +19,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   hostEvents: state.events.hostEvents,
   sessionToken: state.authentication.sessionToken,
+  showOngoingEvents: state.events.showOngoingEvents,
   showPastEvents: state.events.showPastEvents,
-  showStartedEvents: state.events.showStartedEvents,
   showUpcomingEvents: state.events.showUpcomingEvents,
 });
 

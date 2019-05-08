@@ -34,7 +34,6 @@ const EventCardComponent = (props) => (
       </Card.Text>
     </Card.Body>
     <ListGroup variant="flush">
-      <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
       <ListGroup.Item>
         {moment(props.event.time_start).calendar()}
       </ListGroup.Item>

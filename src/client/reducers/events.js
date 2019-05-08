@@ -61,17 +61,17 @@ export const events = (state = initialState, {type, ...payload}) => {
         getHostEventsStatus: STATUS_SUCCESS,
         hostEvents: payload.events.reverse(),
       };
+    case 'TOGGLE_SHOW_ONGOING_EVENTS':
+      return {
+        ...state,
+        ...SHOW_EVENTS_NONE,
+        showOngoingEvents: !state.showOngoingEvents,
+      };
     case 'TOGGLE_SHOW_PAST_EVENTS':
       return {
         ...state,
         ...SHOW_EVENTS_NONE,
         showPastEvents: !state.showPastEvents,
-      };
-    case 'TOGGLE_SHOW_STARTED_EVENTS':
-      return {
-        ...state,
-        ...SHOW_EVENTS_NONE,
-        showStartedEvents: !state.showStartedEvents,
       };
     case 'TOGGLE_SHOW_UPCOMING_EVENTS':
       return {

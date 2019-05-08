@@ -10,13 +10,13 @@ import {connect} from 'react-redux';
 import EventsTogglebarComponent from './Togglebar.component';
 
 const mapDispathToProps = (dispatch) => ({
+  toggleShowOngoingEvents: () =>
+    dispatch({
+      type: 'TOGGLE_SHOW_ONGOING_EVENTS',
+    }),
   toggleShowPastEvents: () =>
     dispatch({
       type: 'TOGGLE_SHOW_PAST_EVENTS',
-    }),
-  toggleShowStartedEvents: () =>
-    dispatch({
-      type: 'TOGGLE_SHOW_STARTED_EVENTS',
     }),
   toggleShowUpcomingEvents: () =>
     dispatch({
@@ -25,8 +25,8 @@ const mapDispathToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
+  showOngoingEvents: state.events.showOngoingEvents,
   showPastEvents: state.events.showPastEvents,
-  showStartedEvents: state.events.showStartedEvents,
   showUpcomingEvents: state.events.showUpcomingEvents,
 });
 

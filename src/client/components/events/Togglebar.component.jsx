@@ -16,11 +16,11 @@ const EventsTogglebar = (props) => (
     <h5>Show Events</h5>
     <ButtonGroup vertical>
       <Button
-        onClick={props.toggleShowStartedEvents}
-        variant={props.showStartedEvents ? 'success' : 'outline-success'}
-        disabled={props.showStartedEvents}
+        onClick={props.toggleShowOngoingEvents}
+        variant={props.showOngoingEvents ? 'success' : 'outline-success'}
+        disabled={props.showOngoingEvents}
       >
-        Started
+        Ongoing
       </Button>
       <Button
         onClick={props.toggleShowUpcomingEvents}
@@ -41,11 +41,11 @@ const EventsTogglebar = (props) => (
 );
 
 EventsTogglebar.propTypes = {
+  showOngoingEvents: BOOLEAN,
   showPastEvents: BOOLEAN,
-  showStartedEvents: BOOLEAN,
   showUpcomingEvents: BOOLEAN,
+  toggleShowOngoingEvents: ACTION,
   toggleShowPastEvents: ACTION,
-  toggleShowStartedEvents: ACTION,
   toggleShowUpcomingEvents: ACTION,
 };
 

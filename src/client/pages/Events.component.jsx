@@ -20,14 +20,14 @@ const EventsPage = (props) => {
   const {getHostEvents, sessionToken} = props;
 
   // Filters
-  const pastEventFilter = (event) => event.time_end < moment();
-  const startedEventFilter = (event) =>
+  const ongoingEventFilter = (event) =>
     event.time_start <= moment() && event.time_end >= moment();
+  const pastEventFilter = (event) => event.time_end < moment();
   const upcomingEventFilter = (event) => event.time_start > moment();
   const filteredEvents = props.hostEvents.filter(
       (event) =>
-        (props.showPastEvents && pastEventFilter(event)) ||
-      (props.showStartedEvents && startedEventFilter(event)) ||
+        (props.showOngoingEvents && ongoingEventFilter(event)) ||
+      (props.showPastEvents && pastEventFilter(event)) ||
       (props.showUpcomingEvents && upcomingEventFilter(event)),
   );
 
@@ -65,8 +65,8 @@ EventsPage.propTypes = {
   getHostEvents: ACTION,
   hostEvents: EVENTS,
   sessionToken: STRING,
+  showOngoingEvents: BOOLEAN,
   showPastEvents: BOOLEAN,
-  showStartedEvents: BOOLEAN,
   showUpcomingEvents: BOOLEAN,
 };
 

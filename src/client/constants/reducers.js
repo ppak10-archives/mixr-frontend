@@ -4,8 +4,8 @@
  */
 
 export const SHOW_EVENTS_NONE = {
+  showOngoingEvents: false,
   showPastEvents: false,
-  showStartedEvents: false,
   showUpcomingEvents: false,
 };
 

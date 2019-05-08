@@ -34,6 +34,12 @@ export const createEvent = (sessionToken, eventObject) => async (dispatch) => {
       dispatch({
         type: 'CREATE_EVENT_SUCCESS',
       });
+      dispatch(
+          createAlert({
+            message: 'Created Event',
+            type: 'success',
+          }),
+      );
       return response.id;
     }
   } catch (err) {
@@ -100,8 +106,8 @@ export const updateEventById = (sessionToken, eventId, eventObject) => async (
       });
       dispatch(
           createAlert({
-            type: 'success',
             message: 'Saved Updates',
+            type: 'success',
           }),
       );
       dispatch(getEventById(sessionToken, eventId));
