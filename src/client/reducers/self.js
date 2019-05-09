@@ -16,7 +16,7 @@ const initialState = {
     lat: DEFAULT_LATITUDE,
     lng: DEFAULT_LONGITUDE,
   },
-  userId: null,
+  userId: 0,
 };
 
 export const self = (state = initialState, {type, ...payload}) => {
