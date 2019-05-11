@@ -4,14 +4,17 @@
  */
 
 // Node Modules
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import React, {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import * as Datetime from 'react-datetime';
 
 // Constants
 import {ANACHRONISTIC_ERROR} from '../../constants/errors';
+import {ICON_NAME_LIST} from '../../constants/events';
 import {EVENT, FUNCTION, STRING} from '../../constants/proptypes';
 import {
   MILLISECONDS_PER_SECOND,
@@ -138,7 +141,7 @@ export const EventDetailsForm = ({eventDetails, formType, ...props}) => {
       {updateHeaderHtml}
       <Form>
         <Form.Group>
-          <Form.Label>Event Name</Form.Label>
+          <Form.Label>Title</Form.Label>
           <Form.Control
             disabled={!editMode}
             onChange={(e) => setTitle(e.target.value)}
@@ -170,7 +173,17 @@ export const EventDetailsForm = ({eventDetails, formType, ...props}) => {
           </Form.Group>
         </Form.Row>
         <Form.Group>
-          <Form.Label>Event Description</Form.Label>
+          <Form.Label>Icon</Form.Label>
+          <ButtonToolbar>
+            {ICON_NAME_LIST.map((iconName, index) => (
+              <Button className="icon" key={index} variant="outline-primary">
+                <FontAwesomeIcon icon={iconName} />
+              </Button>
+            ))}
+          </ButtonToolbar>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Description</Form.Label>
           <Form.Control
             as="textarea"
             disabled={!editMode}
