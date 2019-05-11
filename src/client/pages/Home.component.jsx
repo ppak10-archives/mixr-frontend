@@ -36,7 +36,6 @@ const HomePage = ({createEventStatus, history, resetEventStatus, ...props}) => {
   const onCreate = async (eventObject) => {
     eventObject.capacity = 0;
     eventObject.fee = 0.0;
-    eventObject.icon_url = '';
     eventObject.lat = coordinates.lat;
     eventObject.lng = coordinates.lng;
     const eventId = await props.createEvent(props.sessionToken, eventObject);

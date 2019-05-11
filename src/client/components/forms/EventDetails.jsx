@@ -27,8 +27,9 @@ export const EventDetailsForm = ({eventDetails, formType, ...props}) => {
   // State
   const [description, setDescription] = useState('');
   const [editMode, setEditMode] = useState(false);
-  const [formErrors, setFormErrors] = useState(new Set());
   const [eventObject, setEventObject] = useState({});
+  const [formErrors, setFormErrors] = useState(new Set());
+  const [iconUrl, setIconUrl] = useState('');
   const [timeEnd, setTimeEnd] = useState(NOW);
   const [timeStart, setTimeStart] = useState(NOW);
   const [title, setTitle] = useState('');
@@ -50,12 +51,14 @@ export const EventDetailsForm = ({eventDetails, formType, ...props}) => {
     setEventObject({
       description,
       title,
+      icon_url: iconUrl,
       time_end: timeEnd / MILLISECONDS_PER_SECOND,
       time_start: timeStart / MILLISECONDS_PER_SECOND,
     });
     if (
       editMode &&
       (eventDetails.description !== description ||
+        eventDetails.icon_url !== iconUrl ||
         eventDetails.time_end !== timeEnd ||
         eventDetails.time_start !== timeStart ||
         eventDetails.title !== title)
@@ -64,7 +67,7 @@ export const EventDetailsForm = ({eventDetails, formType, ...props}) => {
     } else {
       setValidSubmit(false);
     }
-  }, [editMode, eventDetails, description, timeEnd, timeStart, title]);
+  }, [editMode, eventDetails, description, iconUrl, timeEnd, timeStart, title]);
 
   // Callbacks
   const onToggleEdit = () => {
@@ -175,11 +178,20 @@ export const EventDetailsForm = ({eventDetails, formType, ...props}) => {
         <Form.Group>
           <Form.Label>Icon</Form.Label>
           <ButtonToolbar>
-            {ICON_NAME_LIST.map((iconName, index) => (
-              <Button className="icon" key={index} variant="outline-primary">
-                <FontAwesomeIcon icon={iconName} />
-              </Button>
-            ))}
+            {ICON_NAME_LIST.map((iconName, index) => {
+              const icon = [eventDetails.icon_url, iconUrl].includes(iconName);
+              return (
+                <Button
+                  className="icon"
+                  disabled={!editMode || icon}
+                  key={index}
+                  onClick={() => setIconUrl(iconName)}
+                  variant={icon ? 'dark' : 'outline-dark'}
+                >
+                  <FontAwesomeIcon icon={iconName} />
+                </Button>
+              );
+            })}
           </ButtonToolbar>
         </Form.Group>
         <Form.Group>
